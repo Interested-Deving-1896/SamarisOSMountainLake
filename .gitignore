@@ -14,7 +14,9 @@ builder/overlay/opt/volt/ai-models/
 # Demo media files (not source code)
 **/Demo/*.mp4
 **/Demo/*.pdf
-annexe/Demo/
+
+# Annexed assets (website, zips, mockups)
+annexe/
 
 # Pre-compiled Rust binaries (built from source in builder/content/)
 builder/overlay/opt/volt/bin/*-x86_64
@@ -22,9 +24,6 @@ builder/overlay/opt/volt/bin/*-aarch64
 builder/overlay/opt/volt/bin/bench
 builder/overlay/opt/volt/bin/kernel-b-*
 builder/overlay/opt/volt/bin/tesseract-engine-*
-
-# Zipped archives
-annexe/*.zip
 
 # Dependencies
 node_modules/
