@@ -1,0 +1,49 @@
+[gpu]
+enabled = true
+mode = "auto"
+backend = "null"
+cpu_fallback = true
+safe_mode = true
+
+[gpu.vram]
+tiers_enabled = true
+compressed_vram_enabled = true
+t2_inside_vram = true
+max_vram_percent = 90
+decompression_scratch_mb = 128
+
+[gpu.vram.compression]
+enabled = true
+default_algorithm = "vgm_zstd_l1"
+fast_algorithm = "vgm_lz4"
+compress_inactive_after_ms = 5000
+verify_checksums = true
+
+[gpu.vram.deduplication]
+enabled = true
+hash = "sha256_truncated_64"
+verify_on_match = true
+
+[gpu.scheduler]
+priority_scheduling = true
+desktop_critical = true
+frame_budget_ms = 16
+
+[gpu.shaders]
+cache_size_mb = 64
+precompile_at_boot = true
+jit_compile = true
+
+[gpu.compute]
+enabled = true
+max_concurrent_compute_jobs = 4
+
+[gpu.thermal]
+watchdog_enabled = true
+backoff_at_80 = true
+cpu_fallback_at_100 = true
+
+[gpu.quotas]
+desktop_mb = 128
+orbit_mb = 512
+default_mb = 64

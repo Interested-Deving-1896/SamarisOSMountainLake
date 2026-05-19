@@ -1,0 +1,23 @@
+pub mod buffer;
+pub mod dedup;
+pub mod fingerprint;
+pub mod refcount;
+pub mod resource_id;
+pub mod resource_meta;
+pub mod resource_table;
+pub mod resource_type;
+pub mod resource_usage;
+pub mod texture;
+pub mod verifier;
+
+pub use resource_id::GpuResourceId;
+pub use resource_type::GpuResourceType;
+pub use resource_usage::GpuResourceUsage;
+pub use resource_meta::GpuResourceMeta;
+pub use resource_table::ResourceTable;
+pub use buffer::GpuBuffer;
+pub use texture::GpuTexture;
+pub use dedup::GpuDedupTable;
+pub use fingerprint::GpuFingerprint;
+pub use refcount::RefCounter;
+pub use verifier::GpuVerifier;

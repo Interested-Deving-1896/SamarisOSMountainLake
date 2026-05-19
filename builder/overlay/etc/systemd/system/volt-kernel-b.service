@@ -1,0 +1,29 @@
+[Unit]
+Description=Samaris Kernel B — Tesseract Engine (VOLT BOOT)
+Documentation=https://samaris.tech/docs/kernel-b
+DefaultDependencies=no
+Before=sysinit.target basic.target multi-user.target graphical.target
+Before=volt-kernel.service volt-fs.service volt-desktop.service
+After=systemd-tmpfiles-setup.service
+
+[Service]
+Type=notify
+NotifyAccess=all
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/start-tesseract.sh
+ExecStartPost=/bin/touch /run/volt-kernel-b.started
+Restart=on-failure
+RestartSec=1
+Nice=-20
+IOSchedulingClass=realtime
+IOSchedulingPriority=0
+CPUAffinity=0 1 2 3
+LimitNOFILE=65536
+LimitMEMLOCK=infinity
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/volt/kernel-b
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=sysinit.target

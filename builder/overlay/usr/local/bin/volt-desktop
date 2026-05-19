@@ -1,0 +1,57 @@
+#!/bin/bash
+set -e
+
+echo "[volt-desktop] Starting Samaris Desktop ($(date))" >&2
+echo "[volt-desktop] DISPLAY=$DISPLAY XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >&2
+
+ELECTRON_BIN=""
+CANDIDATES=(
+  "/opt/volt/electron/samaris-desktop"
+  "/opt/volt/electron/node_modules/.bin/electron"
+  "$(command -v electron 2>/dev/null || true)"
+)
+
+for c in "${CANDIDATES[@]}"; do
+  if [[ -n "$c" && -x "$c" ]]; then
+    ELECTRON_BIN="$c"
+    echo "[volt-desktop] Found electron at: $ELECTRON_BIN" >&2
+    break
+  fi
+done
+
+if [[ -z "$ELECTRON_BIN" ]]; then
+  echo "[volt-desktop] ERROR: Electron binary not found" >&2
+  exit 1
+fi
+
+ELECTRON_DIR="/opt/volt/electron"
+cd "$ELECTRON_DIR" 2>/dev/null || { echo "[volt-desktop] ERROR: cd to $ELECTRON_DIR failed" >&2; exit 1; }
+
+# Fix chrome-sandbox SUID if missing (squashfs doesn't preserve SUID)
+if [[ -f node_modules/electron/dist/chrome-sandbox ]]; then
+  if [[ "$(id -u)" -eq 0 ]]; then
+    chown root:root node_modules/electron/dist/chrome-sandbox 2>/dev/null || true
+    chmod 4755 node_modules/electron/dist/chrome-sandbox 2>/dev/null || true
+  fi
+fi
+
+export NODE_ENV=production
+export ELECTRON_DISABLE_SECURITY_WARNINGS=true
+export DISPLAY="${DISPLAY:-:0}"
+export ELECTRON_DISABLE_SANDBOX=1
+export ELECTRON_USE_GPU=0
+export ELECTRON_SKIP_BINARY_DOWNLOAD=1
+
+# Enable core dumps for debugging
+ulimit -c unlimited 2>/dev/null || true
+
+ELECTRON_FLAGS=(
+  --no-sandbox
+  --disable-gpu
+  --disable-dev-shm-usage
+)
+
+echo "[volt-desktop] Launching: $ELECTRON_BIN $ELECTRON_DIR (DISPLAY=$DISPLAY)" >&2
+
+exec "$ELECTRON_BIN" "${ELECTRON_FLAGS[@]}" "$ELECTRON_DIR" 2>/tmp/electron-err.log >/tmp/electron-out.log
+exit 1

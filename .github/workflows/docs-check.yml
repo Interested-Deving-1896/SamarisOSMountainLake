@@ -1,0 +1,49 @@
+name: Documentation Check
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - '**.md'
+      - 'docs/**'
+      - 'legal/**'
+      - 'project/**'
+      - 'release/**'
+      - 'download/**'
+      - 'community/**'
+  pull_request:
+    paths:
+      - '**.md'
+      - 'docs/**'
+      - 'legal/**'
+      - 'project/**'
+      - 'release/**'
+      - 'download/**'
+      - 'community/**'
+
+jobs:
+  docs-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for broken links
+        run: |
+          if command -v markdown-link-check > /dev/null 2>&1; then
+            find . -name "*.md" -type f | head -50 | xargs -I {} markdown-link-check {} --config .markdown-link-check.json 2>/dev/null || true
+          else
+            echo "markdown-link-check not installed — skipping link validation"
+          fi
+      - name: Spell check (basic)
+        run: |
+          echo "Checking for common Markdown issues..."
+          find . -name "*.md" -type f -exec grep -l "^[^#].*[^.:;!?]$" {} \; 2>/dev/null | head -10 || true
+      - name: Line length check
+        run: |
+          echo "Checking for very long lines..."
+          LONG_LINES=$(find . -name "*.md" -type f -exec awk 'length > 200' {} \; 2>/dev/null | wc -l)
+          if [ "$LONG_LINES" -gt "0" ]; then
+            echo "Warning: $LONG_LINES long lines found (>200 chars)"
+          fi
+      - name: Summary
+        run: |
+          FILE_COUNT=$(find . -name "*.md" -type f | wc -l)
+          echo "Documentation files: $FILE_COUNT"

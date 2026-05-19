@@ -1,0 +1,89 @@
+# Volt USB Manager — Example Configuration
+# See docs/SPEC.md for full documentation of all options.
+
+[manager]
+mount_point = "/mnt/volt_usb"
+backing_path = "/var/volt/usb_backing"
+runtime_dir = "/var/run/volt"
+state_dir = "/var/lib/volt"
+log_level = "info"
+safe_mode = false
+
+[fuse]
+enabled = true
+allow_other = false
+read_only = false
+direct_io = false
+kernel_cache = true
+auto_unmount = true
+
+[device]
+require_removable = true
+detect_interval_ms = 2000
+read_only_fallback = true
+handle_surprise_removal = true
+
+[cache]
+read_cache_max_mb = 256
+evict_at_percent = 90
+compression = true
+zstd_level = 3
+pin_boot_assets = true
+pin_desktop_assets = true
+lru_enabled = true
+
+[writeback]
+enabled = true
+buffer_max_mb = 64
+flush_interval_ms = 5000
+flush_at_percent = 80
+batch_size_kb = 512
+durability_mode = "balanced"
+ack_mode = "lazy"
+metadata_fsync = true
+
+[journal]
+enabled = true
+path = "/var/volt/journal"
+checksum = true
+fsync_on_record = true
+checkpoint_interval_ms = 30000
+replay_on_boot = true
+reject_corrupt_records = true
+
+[scheduler]
+nand_block_kb = 128
+max_concurrent_flushes = 4
+prioritize_desktop = true
+prioritize_metadata = true
+background_throttle = 50
+fairness_window_ms = 100
+
+[prefetch]
+enabled = true
+boot_assets = ["/boot/"]
+desktop_assets = ["/usr/share/"]
+max_prefetch_mb = 128
+
+[compression]
+read_cache_algorithm = "zstd"
+write_cache_algorithm = "lz4"
+zstd_level = 3
+lz4_for_small_files = true
+small_file_threshold_kb = 64
+
+[eject]
+require_clean_journal = true
+force_flush = true
+timeout_ms = 10000
+fail_if_dirty = false
+
+[ram]
+use_volt_ram_manager = true
+quota_mb = 512
+pressure_backoff = true
+
+[metrics]
+enabled = true
+latency_histograms = true
+throughput_counters = true

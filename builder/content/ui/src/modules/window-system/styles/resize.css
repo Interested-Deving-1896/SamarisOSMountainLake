@@ -1,0 +1,100 @@
+.samaris-resize-handle {
+  position: absolute;
+  z-index: 30;
+  pointer-events: auto;
+}
+
+.samaris-resize-n,
+.samaris-resize-s {
+  left: 18px;
+  right: 18px;
+  height: 10px;
+  cursor: ns-resize;
+}
+
+.samaris-resize-n {
+  top: 0;
+}
+
+.samaris-resize-s {
+  bottom: 0;
+}
+
+.samaris-resize-e,
+.samaris-resize-w {
+  top: 18px;
+  bottom: 18px;
+  width: 10px;
+  cursor: ew-resize;
+}
+
+.samaris-resize-e {
+  right: 0;
+}
+
+.samaris-resize-w {
+  left: 0;
+}
+
+.samaris-resize-ne,
+.samaris-resize-nw,
+.samaris-resize-se,
+.samaris-resize-sw {
+  width: 22px;
+  height: 22px;
+}
+
+.samaris-resize-ne {
+  right: 0;
+  top: 0;
+  cursor: nesw-resize;
+}
+
+.samaris-resize-nw {
+  left: 0;
+  top: 0;
+  cursor: nwse-resize;
+}
+
+.samaris-resize-se {
+  right: 0;
+  bottom: 0;
+  cursor: nwse-resize;
+}
+
+.samaris-resize-sw {
+  left: 0;
+  bottom: 0;
+  cursor: nesw-resize;
+}
+
+.samaris-corner-grip {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 22px;
+  height: 22px;
+  z-index: 21;
+  pointer-events: none;
+}
+
+.samaris-corner-grip::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid rgba(255,255,255,0.42);
+  border-bottom: 2px solid rgba(255,255,255,0.42);
+  border-radius: 2px;
+}
+
+.samaris-window.maximized .samaris-resize-handle,
+.samaris-window.maximized .samaris-corner-grip,
+.samaris-window.snapped-left .samaris-resize-handle,
+.samaris-window.snapped-left .samaris-corner-grip,
+.samaris-window.snapped-right .samaris-resize-handle,
+.samaris-window.snapped-right .samaris-corner-grip {
+  display: none;
+}

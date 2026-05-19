@@ -1,0 +1,187 @@
+#!/usr/bin/env node
+/* Minimal local HTTP server for Samaris Desktop.
+   - Serves the React UI (static files under /opt/volt/desktop/app)
+   - Exposes a local filesystem API at /api/fs/*
+   No auth: it is intended for an offline kiosk OS image.
+*/
+
+const http = require("node:http");
+const { URL } = require("node:url");
+const fsp = require("node:fs/promises");
+const fs = require("node:fs");
+const path = require("node:path");
+
+const HOST = process.env.VOLT_FS_HOST || "127.0.0.1";
+const PORT = Number(process.env.VOLT_FS_PORT || "3170");
+const UI_ROOT = process.env.VOLT_UI_ROOT || "/opt/volt/desktop/app";
+
+function json(res, status, data) {
+  const body = JSON.stringify(data);
+  res.writeHead(status, {
+    "access-control-allow-origin": "http://127.0.0.1:3000",
+    "access-control-allow-methods": "GET, POST, OPTIONS",
+    "access-control-allow-headers": "content-type",
+    "content-type": "application/json; charset=utf-8",
+    "content-length": Buffer.byteLength(body)
+  });
+  res.end(body);
+}
+
+function bad(res, msg, status = 400) {
+  json(res, status, { ok: false, error: msg });
+}
+
+function normalizeUserPath(p) {
+  if (typeof p !== "string") return null;
+  const trimmed = p.trim();
+  if (trimmed === "") return null;
+  const abs = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+  return path.posix.normalize(abs);
+}
+
+async function readJson(req) {
+  const chunks = [];
+  for await (const c of req) chunks.push(c);
+  const s = Buffer.concat(chunks).toString("utf8");
+  if (!s) return {};
+  return JSON.parse(s);
+}
+
+async function listDir(absPath) {
+  const ents = await fsp.readdir(absPath, { withFileTypes: true });
+  const nodes = await Promise.all(
+    ents
+      .filter((e) => e.name !== "." && e.name !== "..")
+      .map(async (e) => {
+        const full = path.posix.join(absPath, e.name);
+        if (e.isDirectory()) return { name: e.name, kind: "dir" };
+        if (e.isFile()) {
+          const st = await fsp.stat(full);
+          return { name: e.name, kind: "file", size: st.size };
+        }
+        return { name: e.name, kind: "file" };
+      })
+  );
+  nodes.sort((a, b) => (a.kind === b.kind ? a.name.localeCompare(b.name) : a.kind === "dir" ? -1 : 1));
+  return nodes;
+}
+
+function contentTypeFor(p) {
+  const ext = path.extname(p).toLowerCase();
+  if (ext === ".html") return "text/html; charset=utf-8";
+  if (ext === ".js") return "application/javascript; charset=utf-8";
+  if (ext === ".css") return "text/css; charset=utf-8";
+  if (ext === ".json") return "application/json; charset=utf-8";
+  if (ext === ".map") return "application/json; charset=utf-8";
+  if (ext === ".svg") return "image/svg+xml";
+  if (ext === ".png") return "image/png";
+  if (ext === ".jpg" || ext === ".jpeg") return "image/jpeg";
+  if (ext === ".ico") return "image/x-icon";
+  if (ext === ".woff") return "font/woff";
+  if (ext === ".woff2") return "font/woff2";
+  if (ext === ".ttf") return "font/ttf";
+  return "application/octet-stream";
+}
+
+function resolveUiPath(urlPath) {
+  const rel = urlPath.startsWith("/") ? urlPath.slice(1) : urlPath;
+  const abs = path.resolve(UI_ROOT, rel);
+  const root = path.resolve(UI_ROOT);
+  if (!abs.startsWith(root + path.sep) && abs !== root) return null;
+  return abs;
+}
+
+async function serveFile(res, absPath) {
+  const st = await fsp.stat(absPath).catch(() => null);
+  if (!st || !st.isFile()) return false;
+
+  res.writeHead(200, {
+    "access-control-allow-origin": "*",
+    "content-type": contentTypeFor(absPath),
+    "content-length": st.size,
+    // Keep it simple and safe for the first iteration.
+    "cache-control": absPath.endsWith(".html") ? "no-store" : "public, max-age=31536000, immutable"
+  });
+
+  fs.createReadStream(absPath).pipe(res);
+  return true;
+}
+
+const server = http.createServer(async (req, res) => {
+  try {
+    const u = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
+
+    if (req.method === "OPTIONS") {
+      res.writeHead(204, {
+        "access-control-allow-origin": "http://127.0.0.1:3000",
+        "access-control-allow-methods": "GET, POST, OPTIONS",
+        "access-control-allow-headers": "content-type"
+      });
+      res.end();
+      return;
+    }
+
+    if (u.pathname === "/health") return json(res, 200, { ok: true });
+
+    // API
+    if (u.pathname === "/api/fs/list" && req.method === "GET") {
+      const p = normalizeUserPath(u.searchParams.get("path") || "/");
+      if (!p) return bad(res, "Invalid path");
+      const st = await fsp.stat(p).catch(() => null);
+      if (!st) return bad(res, "Not found", 404);
+      if (!st.isDirectory()) return bad(res, "Not a directory", 400);
+      const nodes = await listDir(p);
+      return json(res, 200, { ok: true, path: p, nodes });
+    }
+
+    if (u.pathname === "/api/fs/mkdir" && req.method === "POST") {
+      const body = await readJson(req);
+      const p = normalizeUserPath(body.path);
+      if (!p) return bad(res, "Invalid path");
+      await fsp.mkdir(p, { recursive: true });
+      return json(res, 200, { ok: true });
+    }
+
+    if (u.pathname === "/api/fs/rename" && req.method === "POST") {
+      const body = await readJson(req);
+      const from = normalizeUserPath(body.from);
+      const to = normalizeUserPath(body.to);
+      if (!from || !to) return bad(res, "Invalid path(s)");
+      await fsp.rename(from, to);
+      return json(res, 200, { ok: true });
+    }
+
+    if (u.pathname === "/api/fs/delete" && req.method === "POST") {
+      const body = await readJson(req);
+      const p = normalizeUserPath(body.path);
+      if (!p) return bad(res, "Invalid path");
+      const recursive = Boolean(body.recursive);
+      await fsp.rm(p, { recursive, force: true });
+      return json(res, 200, { ok: true });
+    }
+
+    // Static UI
+    if (req.method !== "GET" && req.method !== "HEAD") return bad(res, "Method not allowed", 405);
+
+    const wanted = u.pathname === "/" ? "/index.html" : u.pathname;
+    const abs = resolveUiPath(wanted);
+    if (!abs) return bad(res, "Not found", 404);
+
+    if (await serveFile(res, abs)) return;
+
+    // SPA fallback (only for non-extension paths)
+    if (!path.extname(wanted)) {
+      const indexAbs = resolveUiPath("/index.html");
+      if (indexAbs && (await serveFile(res, indexAbs))) return;
+    }
+
+    return bad(res, "Not found", 404);
+  } catch (e) {
+    return json(res, 500, { ok: false, error: String(e && e.message ? e.message : e) });
+  }
+});
+
+server.listen(PORT, HOST, () => {
+  // eslint-disable-next-line no-console
+  console.log(`[volt] ui+fs listening on http://${HOST}:${PORT} (ui: ${UI_ROOT})`);
+});

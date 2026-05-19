@@ -1,0 +1,22 @@
+[Unit]
+Description=Volt Adaptive System Config — Hardware-Aware Policy Compiler
+Documentation=https://samaris.tech/docs/asc
+DefaultDependencies=no
+Before=sysinit.target basic.target multi-user.target graphical.target
+Before=volt-kernel-b.service volt-worker-pool.service volt-ram-manager.service volt-usb-manager.service volt-gpu-manager.service volt-kernel.service
+After=systemd-tmpfiles-setup.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/start-volt-asc.sh
+ExecStartPost=/bin/touch /run/volt-asc.complete
+Nice=-20
+LimitNOFILE=65536
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/volt/asc
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=sysinit.target

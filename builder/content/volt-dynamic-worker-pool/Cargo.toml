@@ -1,0 +1,69 @@
+[package]
+name = "volt-dynamic-worker-pool"
+version = "2.0.0"
+edition = "2021"
+description = "Samaris OS — Volt Dynamic Worker Pool — Cooperative Adaptive Priority Scheduler"
+
+[[bin]]
+name = "volt-dynamic-worker-pool"
+path = "src/main.rs"
+
+[features]
+default = ["adaptive", "metrics", "desktop_guard"]
+adaptive = []
+metrics = []
+desktop_guard = []
+thermal = []
+adapters = []
+devtools = []
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive"] }
+parking_lot = "0.12"
+crossbeam = "0.8"
+dashmap = "6"
+uuid = { version = "1", features = ["v4", "serde"] }
+once_cell = "1"
+smallvec = "1"
+time = "0.3"
+nix = { version = "0.29", features = ["fs", "ioctl", "mman"] }
+ctrlc = "3"
+
+[dev-dependencies]
+criterion = "0.5"
+tempfile = "3"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[[bench]]
+name = "scheduling_bench"
+harness = false
+
+[[bench]]
+name = "queue_bench"
+harness = false
+
+[[bench]]
+name = "worker_spawn_bench"
+harness = false
+
+[[bench]]
+name = "yield_point_bench"
+harness = false
+
+[[bench]]
+name = "scaling_bench"
+harness = false
+
+[[bench]]
+name = "orbit_burst_bench"
+harness = false

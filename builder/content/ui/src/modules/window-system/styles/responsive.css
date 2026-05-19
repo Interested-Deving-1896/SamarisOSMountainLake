@@ -1,0 +1,26 @@
+@media (max-width: 760px) {
+  .samaris-window {
+    min-width: 310px;
+  }
+
+  .samaris-window-body {
+    grid-template-columns: 1fr;
+  }
+
+  .samaris-window-sidebar {
+    display: none;
+  }
+
+  .samaris-cards,
+  .samaris-metric-row {
+    grid-template-columns: 1fr;
+  }
+
+  .samaris-topbar-center {
+    display: none;
+  }
+
+  .samaris-topbar {
+    grid-template-columns: 1fr auto;
+  }
+}

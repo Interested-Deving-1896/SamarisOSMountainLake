@@ -1,0 +1,10 @@
+.fw{height:100%;display:grid;grid-template-rows:auto auto auto 1fr;padding:22px;gap:16px;background:linear-gradient(180deg,rgba(255,255,255,.84),rgba(247,250,255,.76))}
+.fw__hero,.fw__policies,.fw__rule{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.fw__title{font-size:28px;font-weight:800;color:var(--text)}
+.fw__subtitle,.fw__meta,.fw__ruleMeta{font-size:13px;color:var(--muted)}
+.fw__policy,.fw__remove,.fw__switch{height:40px;padding:0 14px;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.82);color:var(--text);font-weight:700}
+.fw__policy--primary{background:#2f6df6;color:#fff;border-color:rgba(47,109,246,.18)}
+.fw__rules{overflow:auto;display:grid;gap:12px}
+.fw__rule{padding:16px;border-radius:18px;border:1px solid var(--stroke);background:rgba(255,255,255,.76)}
+.fw__ruleTitle{font-size:15px;font-weight:750;color:var(--text)}
+html[data-theme="dark"] .fw,html[data-theme="dark"] .fw__rule,html[data-theme="dark"] .fw__policy,html[data-theme="dark"] .fw__remove,html[data-theme="dark"] .fw__switch{background:rgba(17,24,39,.74);border-color:rgba(148,163,184,.12)}

@@ -1,0 +1,105 @@
+[manager]
+workers = 8
+shm_size_mb = 64
+page_size_kb = 4
+enable_compression = true
+enable_deduplication = true
+enable_v8_gc_signal = true
+enable_file_cache = true
+
+[pressure]
+green_max = 65
+yellow_enter = 70
+yellow_exit = 65
+orange_enter = 85
+orange_exit = 80
+red_enter = 95
+red_exit = 90
+monitor_interval_ms = 1000
+event_cooldown_ms = 1000
+
+[compression]
+default_algorithm = "zstd"
+default_zstd_level = 3
+ui_zstd_level = 1
+archive_zstd_level = 5
+inactive_after_ms = 5000
+background_threads = 2
+lz4_for_binary_buffers = true
+
+[deduplication]
+enabled = true
+min_allocation_size_kb = 4
+hash = "sha256_truncated_64"
+verify_on_match = true
+
+[pools]
+size_classes = ["16B", "64B", "256B", "1KB", "4KB", "16KB", "64KB"]
+large_allocation_threshold_kb = 64
+
+[gc]
+enabled = true
+orange_only = true
+cooldown_ms = 10000
+respect_animation_guard = true
+
+[apps.desktop]
+quota_mb = 256
+priority = "critical"
+compression = false
+preferred_tier = "T2"
+
+[apps.orbit]
+quota_mb = 2048
+priority = "critical"
+compression = false
+preferred_tier = "T1"
+
+[apps.peregrine]
+quota_mb = 512
+priority = "high"
+compression = true
+inactive_after_ms = 10000
+preferred_tier = "T2"
+
+[apps.finder]
+quota_mb = 256
+priority = "high"
+compression = true
+inactive_after_ms = 5000
+preferred_tier = "T2"
+
+[apps.photos]
+quota_mb = 256
+priority = "normal"
+compression = true
+inactive_after_ms = 5000
+preferred_tier = "T2"
+
+[apps.music]
+quota_mb = 128
+priority = "normal"
+compression = true
+inactive_after_ms = 3000
+preferred_tier = "T2"
+
+[apps.settings]
+quota_mb = 64
+priority = "low"
+compression = true
+inactive_after_ms = 5000
+preferred_tier = "T2"
+
+[apps.wallpaper]
+quota_mb = 32
+priority = "idle"
+compression = true
+inactive_after_ms = 0
+preferred_tier = "T3"
+
+[apps.default]
+quota_mb = 128
+priority = "normal"
+compression = true
+inactive_after_ms = 5000
+preferred_tier = "T2"

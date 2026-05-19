@@ -1,0 +1,89 @@
+.downloads {
+  height: 100%; display: flex; flex-direction: column;
+  background: var(--bg1); color: var(--text);
+}
+
+.downloads__header {
+  display: flex; align-items: center; gap: var(--space-md);
+  padding: var(--space-lg); border-bottom: 1px solid var(--stroke);
+  flex-shrink: 0;
+}
+
+.downloads__title { margin: 0; font-size: var(--font-lg); font-weight: 700; }
+
+.downloads__filters { display: flex; gap: 4px; margin-left: auto; }
+
+.downloads__filter {
+  border: 0; background: transparent; color: var(--muted);
+  font-size: var(--font-xs); padding: 4px 10px; border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.downloads__filter--active { background: var(--panel-strong); color: var(--text); font-weight: 600; }
+.downloads__filter:hover { background: var(--panel); }
+
+.downloads__clear {
+  border: 0; background: transparent; color: var(--muted);
+  font-size: var(--font-xs); cursor: pointer; display: flex; align-items: center; gap: 4px;
+  padding: 4px 8px; border-radius: var(--radius-sm);
+}
+.downloads__clear:hover { color: #e06c75; background: rgba(224, 108, 117, 0.1); }
+
+.downloads__list { flex: 1; overflow: auto; padding: 0 var(--space-lg) var(--space-lg); }
+.downloads__empty { display: grid; place-items: center; gap: 8px; padding: 60px 20px; color: var(--muted); }
+
+.downloads__item {
+  display: flex; align-items: center; gap: var(--space-md);
+  padding: var(--space-md); border-radius: var(--radius-md);
+  margin-top: var(--space-sm);
+  background: var(--panel); border: 1px solid var(--panel-border);
+}
+.downloads__itemIcon {
+  width: 40px; height: 40px; border-radius: var(--radius-sm);
+  display: grid; place-items: center;
+  background: var(--panel-strong); color: var(--accent); flex-shrink: 0;
+}
+.downloads__itemInfo { flex: 1; min-width: 0; }
+.downloads__itemName { font-size: var(--font-sm); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.downloads__itemMeta { font-size: var(--font-2xs); color: var(--muted); margin-top: 2px; }
+.downloads__itemError { color: #e06c75; }
+
+.downloads__progress { height: 4px; background: var(--stroke); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+.downloads__progressBar { height: 100%; background: var(--accent); border-radius: 2px; transition: width 300ms ease; }
+
+.downloads__itemActions { display: flex; gap: 4px; flex-shrink: 0; }
+.downloads__actionBtn {
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  border: 0; background: transparent; color: var(--muted);
+  cursor: pointer; display: grid; place-items: center;
+}
+.downloads__actionBtn:hover { background: var(--panel-strong); color: var(--text); }
+
+.downloads__item--completed { opacity: 0.7; }
+.downloads__item--failed { border-color: rgba(224, 108, 117, 0.3); }
+.downloads__item--cancelled { opacity: 0.4; }
+
+/* ── Toast ── */
+.download-toast {
+  position: fixed; bottom: calc(80px * var(--scale)); right: var(--space-lg);
+  width: calc(300px * var(--scale)); z-index: 100001;
+  background: var(--panel-solid); border: 1px solid var(--stroke);
+  border-radius: var(--radius-md); box-shadow: 0 8px 32px var(--shadow);
+  overflow: hidden;
+}
+.download-toast__header {
+  display: flex; align-items: center; gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-xs); font-weight: 600; color: var(--text);
+  border-bottom: 1px solid var(--stroke);
+}
+.download-toast__close {
+  margin-left: auto; border: 0; background: transparent;
+  color: var(--muted); cursor: pointer;
+}
+.download-toast__item { padding: var(--space-sm) var(--space-md); }
+.download-toast__name { font-size: var(--font-xs); display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.download-toast__size { font-size: var(--font-2xs); color: var(--muted); }
+.download-toast__progress { height: 3px; background: var(--stroke); border-radius: 2px; margin-top: 4px; overflow: hidden; }
+.download-toast__progressBar { height: 100%; background: var(--accent); transition: width 200ms ease; }
+.download-toast__item--done { opacity: 0.6; }
+.download-toast__more { text-align: center; font-size: var(--font-2xs); color: var(--muted); padding: 4px; }

@@ -1,0 +1,44 @@
+/* ═════════════════════════════════════════════════
+   SAMARIS OS — Accessibility & Motion Rules
+   Respects documentElement data-* attributes
+   set by Settings app
+   ═════════════════════════════════════════════════ */
+
+/* ── Reduce Motion ── */
+html[data-reduce-motion="true"] *,
+html[data-reduce-motion="true"] *::before,
+html[data-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ── Disable Animations (separate from reduce-motion) ── */
+html[data-disable-animations="true"] *,
+html[data-disable-animations="true"] *::before,
+html[data-disable-animations="true"] *::after {
+  animation: none !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ── High Contrast ── */
+html[data-high-contrast="true"] {
+  filter: contrast(1.35) brightness(1.05);
+}
+html[data-high-contrast="true"] * {
+  text-shadow: none !important;
+}
+
+/* ── Bold Text ── */
+html[data-bold-text="true"] body {
+  font-weight: 500;
+}
+html[data-bold-text="true"] body b,
+html[data-bold-text="true"] body strong {
+  font-weight: 800;
+}
+
+/* ── Pointer Size ── */
+html[data-pointer-scale] {
+  --ptr-scale: attr(data-pointer-scale number, 1);
+}

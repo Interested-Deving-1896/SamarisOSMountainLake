@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BenchBaseline",
+  "description": "An imported or self-measured baseline for comparison",
+  "type": "object",
+  "required": ["source", "hardware", "os", "overall", "category_scores", "imported_at"],
+  "properties": {
+    "source": { "type": "string", "enum": ["self_measured", "imported"] },
+    "import_label": { "type": "string" },
+    "imported_at": { "type": "string", "format": "date-time" },
+    "measurement_date": { "type": "string", "format": "date-time" },
+    "hardware": {
+      "type": "object",
+      "properties": {
+        "class": { "type": "string" },
+        "model": { "type": "string" },
+        "cpu": { "type": "string" },
+        "cpu_cores": { "type": "integer" },
+        "ram_gb": { "type": "number" },
+        "gpu": { "type": "string" },
+        "storage_type": { "type": "string" },
+        "arch": { "type": "string" }
+      }
+    },
+    "os": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "overall": {
+      "type": "object",
+      "properties": {
+        "score": { "type": "number" },
+        "badge": { "type": "string" }
+      }
+    },
+    "category_scores": {
+      "type": "object",
+      "properties": {
+        "system": { "type": "number" },
+        "ui": { "type": "number" },
+        "memory": { "type": "number" },
+        "kernel": { "type": "number" },
+        "graphics": { "type": "number" },
+        "ai": { "type": "number" },
+        "browser": { "type": "number" },
+        "filesystem": { "type": "number" },
+        "stability": { "type": "number" }
+      }
+    }
+  }
+}

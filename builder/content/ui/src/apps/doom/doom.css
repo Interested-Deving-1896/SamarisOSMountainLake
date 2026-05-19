@@ -1,0 +1,86 @@
+.doom {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  background: linear-gradient(180deg, #16090a 0%, #090305 100%);
+  color: #fce9e7;
+}
+
+.doom__sidebar {
+  padding: 22px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(circle at top left, rgba(239, 68, 68, 0.22), transparent 24%),
+    linear-gradient(180deg, rgba(31, 10, 12, 0.96), rgba(13, 4, 5, 0.98));
+}
+
+.doom__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+  border: 1px solid rgba(252, 165, 165, 0.14);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.doom__sidebar h2 {
+  margin: 18px 0 14px;
+  font-size: 28px;
+  line-height: 1.04;
+}
+
+.doom__tips {
+  display: grid;
+  gap: 12px;
+}
+
+.doom__tip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(252, 231, 232, 0.84);
+  font-size: 13px;
+}
+
+.doom__viewportShell {
+  min-width: 0;
+  min-height: 0;
+  position: relative;
+  padding: 18px;
+}
+
+.doom__viewport {
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.45);
+}
+
+.doom__viewport .jsdos-rso,
+.doom__viewport canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.doom__overlay {
+  position: absolute;
+  inset: 18px;
+  border-radius: 24px;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 2, 3, 0.62);
+  color: #f9d3d3;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.doom__overlay--error {
+  color: #fecaca;
+}

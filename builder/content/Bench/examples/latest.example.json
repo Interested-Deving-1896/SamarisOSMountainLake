@@ -1,0 +1,92 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-05-17T10:00:00Z",
+  "run": {
+    "run_id": "bench-2026-05-17-100000",
+    "mode": "full",
+    "duration_seconds": 120,
+    "iterations": 5,
+    "warmup_iterations": 1,
+    "cold_run": false,
+    "median_score": 9225,
+    "mean_score": 9188,
+    "min_score": 9040,
+    "max_score": 9280,
+    "stddev_score": 84,
+    "confidence": "high",
+    "reliability_flags": []
+  },
+  "hardware": {
+    "class": "old_intel_desktop",
+    "model": "Mac Mini 2012",
+    "cpu": "Intel Core i5-3210M",
+    "cpu_cores": 2,
+    "ram_gb": 4,
+    "gpu": "Intel HD Graphics 4000",
+    "storage_type": "ssd",
+    "storage_model": "Samsung 870 EVO",
+    "arch": "x86_64",
+    "battery_or_ac": "ac",
+    "thermal_state": "nominal"
+  },
+  "environment": {
+    "display_resolution": "1920x1080",
+    "display_scale": 1.0,
+    "network_connected": true,
+    "running_from_usb": false,
+    "running_in_vm": false,
+    "power_mode": "ac",
+    "temperature_celsius": 52,
+    "kernel_version": "6.8-samaris",
+    "system_uptime_seconds": 300
+  },
+  "os": {
+    "name": "Samaris OS",
+    "version": "Mountain Lake Alpha One",
+    "build": "RC1",
+    "commit_hash": null,
+    "release_channel": "alpha",
+    "boot_mode": "uefi"
+  },
+  "overall": {
+    "score": 9225,
+    "score_out_of": 10000,
+    "normalized_score": 92.25,
+    "badge": "Exceptional",
+    "validity": "same_hardware_only"
+  },
+  "category_scores": {
+    "system": 88,
+    "ui": 98,
+    "memory": 94,
+    "kernel": 90,
+    "graphics": 86,
+    "ai": 85,
+    "browser": 82,
+    "filesystem": 92,
+    "stability": 96
+  },
+  "metrics": {
+    "system": { "boot_time_seconds": 12, "ram_idle_percent": 65, "cpu_idle_percent": 92, "process_count": 142 },
+    "ui": { "fps_idle": 58, "fps_animation": 52, "fps_scroll": 48, "app_launch_finder_ms": 420, "app_launch_peregrine_ms": 850, "window_resize_latency_ms": 12 },
+    "memory": { "compression_ratio": 2.8, "dedup_ratio": 1.6, "swap_avoidance_score": 94, "memory_reclaim_latency_ms": 8 },
+    "kernel": { "sbp_latency_us": 42, "daemon_response_time_ms": 1.2, "ipc_queue_depth": 3, "service_restart_count": 0 },
+    "graphics": { "vram_used_mb": 512, "shader_cache_hit_rate": 87, "frame_budget_ms": 12, "thermal_backoff_events": 0 },
+    "ai": { "model_load_time_ms": 3200, "inference_first_ms": 850, "inference_subsequent_ms": 320, "tokens_per_second": 42, "tts_synthesis_ms": 1200 },
+    "browser": { "page_load_youtube_ms": 2200, "tab_switch_latency_ms": 180, "memory_per_tab_mb": 210, "cold_start_ms": 1400 },
+    "filesystem": { "listing_1k_items_ms": 180, "search_latency_ms": 420, "cache_hit_rate": 92, "fs_read_latency_ms": 4, "fs_write_latency_ms": 6 },
+    "stability": { "crash_free": true, "service_health": "all_healthy", "thermal_stable": true }
+  },
+  "comparison": {
+    "baselines": [],
+    "comparison_validity": "none"
+  },
+  "optimizer": {
+    "fitness_score": 9225,
+    "bottlenecks": ["slow_orbit_inference", "high_browser_memory"],
+    "recommendations": [
+      { "area": "ai", "action": "Reduce Orbit preload model size", "priority": "medium", "expected_impact": "+150 score" },
+      { "area": "browser", "action": "Enable tab discarding for inactive tabs", "priority": "medium", "expected_impact": "+100 score" }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+[Unit]
+Description=VOLT Display Manager — Hotplug Watcher
+Documentation=https://samaris.dev/docs/volt-display-manager
+After=volt-display-manager.service
+Wants=volt-display-manager.service
+PartOf=graphical-session.target
+
+# Long-running daemon that watches for display changes.
+# Restarts automatically if it crashes.
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+ExecStart=/usr/local/bin/volt-display-manager --watch
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target

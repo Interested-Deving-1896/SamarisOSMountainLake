@@ -1,0 +1,21 @@
+[Unit]
+Description=Volt Dynamic Worker Pool — Cooperative Adaptive Priority Scheduler
+Documentation=https://samaris.tech/docs/worker-pool
+After=volt-kernel-b.service volt-asc.service
+Before=volt-kernel.service
+Wants=volt-kernel-b.service volt-asc.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/start-worker-pool.sh
+Restart=on-failure
+RestartSec=1
+Nice=-10
+LimitNOFILE=65536
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/volt/worker-pool
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

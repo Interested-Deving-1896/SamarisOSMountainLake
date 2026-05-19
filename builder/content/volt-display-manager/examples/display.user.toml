@@ -1,0 +1,18 @@
+# VOLT Display Manager — User Preferences
+# Path: ~/.config/samaris/display.toml
+# Persistent across sessions. Overrides automatic detection.
+
+[preferences]
+# Prefer this screen as primary (if connected)
+primary = "HDMI-1"
+
+# Layout: "auto", "single", "mirror", "extend"
+layout_mode = "extend"
+
+# Per-screen overrides
+[preferences.screens.HDMI-1]
+scale_factor = 1.5          # Override auto-detected 2.0
+rotation = "normal"
+
+[preferences.screens.DP-1]
+scale_factor = 1.0

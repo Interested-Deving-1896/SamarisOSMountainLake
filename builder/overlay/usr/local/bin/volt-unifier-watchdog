@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+url="${VOLT_UNIFIER_HEALTH_URL:-http://127.0.0.1:9999/api/unifier/health}"
+interval="${VOLT_UNIFIER_WATCH_INTERVAL:-5}"
+
+echo "[volt-unifier] watchdog starting ($url)" >&2
+
+while true; do
+  if payload="$(curl -fsS --max-time 2 "$url" 2>/dev/null)"; then
+    status="$(printf '%s' "$payload" | sed -n 's/.*"overallStatus":"\([^"]*\)".*/\1/p')"
+    echo "[volt-unifier] health=${status:-unknown}" >&2
+  else
+    echo "[volt-unifier] waiting for Kernel A unifier endpoint" >&2
+  fi
+  sleep "$interval"
+done

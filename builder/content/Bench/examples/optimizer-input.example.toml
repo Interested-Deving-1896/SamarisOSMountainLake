@@ -1,0 +1,25 @@
+[optimizer]
+run_id = "bench-2026-05-17-100000"
+hardware_class = "old_intel_desktop"
+fitness_score = 9225
+
+[bottlenecks]
+items = ["slow_orbit_inference", "high_browser_memory"]
+
+[[recommendations]]
+area = "ai"
+action = "Reduce Orbit preload model size"
+priority = "medium"
+expected_impact = "+150 score"
+
+[[recommendations]]
+area = "browser"
+action = "Enable tab discarding for inactive tabs"
+priority = "medium"
+expected_impact = "+100 score"
+
+[regression_alerts]
+items = []
+
+[unstable_metrics]
+items = []

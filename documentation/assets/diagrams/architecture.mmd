@@ -1,0 +1,36 @@
+graph TB
+    subgraph Shell["Electron Shell"]
+        WM["Window Manager"]
+        Dock["Dock"]
+        AirBar["AirBar"]
+        Apps["Apps (Orbit, Finder, Terminal…)"]
+    end
+    subgraph Kernel["Kernel A — Node.js"]
+        R["Router"]
+        S["30+ Services"]
+        U["Volt Unifier"]
+    end
+    subgraph Rust["Rust Daemons"]
+        KB["Kernel B — Tesseract Engine"]
+        VRM["VRM — RAM Manager"]
+        DWP["DWP — Worker Pool"]
+        VGM["VGM — GPU Manager"]
+        VUM["VUM — USB Manager"]
+        ASC["ASC — Adaptive Config"]
+    end
+    subgraph AI["AI Stack"]
+        LLM["llama-server — Qwen3 1.7B"]
+        STT["Whisper — Speech-to-Text"]
+        TTS["OuteTTS 0.2 — Text-to-Speech"]
+    end
+    subgraph ISO["ISO (Debian Trixie)"]
+        FW["Firmware / Drivers"]
+        DEB["Debian Base"]
+    end
+    Shell -->|"WebSocket :9999"| Kernel
+    Kernel -->|"SBP Unix Sockets"| Rust
+    Kernel -->|"spawn"| AI
+    KB -->|"JSON-RPC"| LLM
+    ISO --> Shell
+    ISO --> Kernel
+    ISO --> Rust

@@ -1,0 +1,45 @@
+[manager]
+mount_point = "/mnt/samaris-usb"
+backing_path = "/run/media/samaris/USB"
+safe_mode = true
+
+[fuse]
+enabled = false
+read_only = false
+auto_unmount = true
+
+[device]
+require_removable = true
+detect_interval_ms = 1000
+handle_surprise_removal = true
+
+[cache]
+read_cache_max_mb = 256
+evict_at_percent = 90
+compression = true
+zstd_level = 3
+pin_boot_assets = true
+
+[writeback]
+enabled = true
+buffer_max_mb = 128
+flush_interval_ms = 5000
+batch_size_kb = 128
+durability_mode = "journaled"
+metadata_fsync = true
+
+[journal]
+enabled = true
+path = "/var/lib/samaris/volt-usb-manager/journal.wal"
+checksum = true
+fsync_on_record = true
+replay_on_boot = true
+reject_corrupt_records = true
+
+[scheduler]
+nand_block_kb = 128
+max_concurrent_flushes = 2
+
+[metrics]
+enabled = true
+latency_histograms = true

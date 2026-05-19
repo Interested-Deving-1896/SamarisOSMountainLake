@@ -1,0 +1,38 @@
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                       ║
+║                               NETTOYAGE                                               ║
+║                                                                                       ║
+╠══════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                       ║
+║  ╔══════════════════════════════════════════════════════════════════════════╗          ║
+║  ║                                                                          ║          ║
+║  ║       ATTENTION : Cette action est irreversible !                        ║          ║
+║  ║                                                                          ║          ║
+║  ╚══════════════════════════════════════════════════════════════════════════╝          ║
+║                                                                                       ║
+║  ┌─ CE QUI SERA SUPPRIME ────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  Workdir (/samaris-work/)                   12.4 GB    [rootfs + state]     |  ║
+║  |  [X]  Checkpoints (output/checkpoints/)           1.2 MB    [etat du build]      |  ║
+║  |  [ ]  Cache (builder/cache/)                      2.1 GB    [paquets .deb, AI]   |  ║
+║  |  [ ]  Output ISO (output/*.iso)                   1.8 GB    [ISO generee]        |  ║
+║  |  [ ]  Docker image (samaris-os-builder:trixie)    1.5 GB    [image Docker]       |  ║
+║  |                                                                                  |  ║
+║  |  Total selectionne : 12.4 GB                                                     |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ ACTIONS RAPIDES ─────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  1)  Nettoyage rapide       (workdir + checkpoints)        12.4 GB               |  ║
+║  |  2)  Nettoyage complet      (tout sauf Docker image)       16.3 GB               |  ║
+║  |  3)  Nettoyage total        (tout, y compris Docker)       17.8 GB               |  ║
+║  |  4)  Personnalise           (choisir chaque element)                              |  ║
+║  |                                                                                  |  ║
+║  |  Pour l'option 4, utilisez [ESPACE] pour cocher/decocher les elements ci-dessus  |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  Confirmer l'action [1-4, n pour annuler] : _                                         ║
+║                                                                                       ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝

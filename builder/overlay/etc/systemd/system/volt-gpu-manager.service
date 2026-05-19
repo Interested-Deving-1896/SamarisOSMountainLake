@@ -1,0 +1,19 @@
+[Unit]
+Description=Volt GPU Manager — GPU Orchestration Layer
+Documentation=https://samaris.tech/docs/gpu-manager
+After=volt-ram-manager.service
+Before=volt-kernel.service
+Wants=volt-ram-manager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/start-gpu-manager.sh
+Restart=on-failure
+RestartSec=1
+Nice=-10
+LimitNOFILE=65536
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/volt/gpu-manager
+
+[Install]
+WantedBy=multi-user.target

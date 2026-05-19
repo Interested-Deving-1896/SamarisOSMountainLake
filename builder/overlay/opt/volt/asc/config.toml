@@ -1,0 +1,74 @@
+[adaptive]
+enabled = true
+mode = "auto"
+profile = "balanced"
+safe_mode = true
+explain = true
+
+[hardware]
+cpu_cores = "auto"
+ram_total_mb = "auto"
+gpu_available = "auto"
+usb_speed = "auto"
+storage_type = "auto"
+boot_medium = "auto"
+is_vm = "auto"
+is_laptop = "auto"
+
+[budget]
+enabled = true
+safety_margin_percent = "auto"
+max_samaris_ram_percent = "auto"
+protect_desktop = true
+reduce_orbit_before_desktop = true
+
+[profiles]
+available = [
+  "balanced",
+  "performance",
+  "powersave",
+  "safe",
+  "debug",
+  "vm",
+  "usb_boot",
+  "low_ram"
+]
+
+[kernel_b]
+enabled = true
+workers = "auto"
+
+[worker_pool]
+min_workers = "auto"
+max_workers = "auto"
+desktop_min = "auto"
+system_min = "auto"
+orbit_default_max = "auto"
+orbit_burst_max = "auto"
+orbit_burst_window_ms = "auto"
+
+[vrm]
+enabled = true
+desktop_quota_mb = "auto"
+orbit_quota_mb = "auto"
+cache_mb = "auto"
+pressure_policy = "auto"
+compression_level = "auto"
+
+[vum]
+enabled = true
+cache_mb = "auto"
+buffer_mb = "auto"
+flush_interval_ms = "auto"
+batch_size_kb = "auto"
+journal_mode = "strict"
+prefetch_boot_assets = "auto"
+
+[explain]
+write_report = true
+report_path = "/var/lib/samaris/asc/last-explain-report.md"
+
+[output]
+generated_config_path = "/run/samaris/adaptive.generated.toml"
+hardware_profile_path = "/var/lib/samaris/asc/last-hardware-profile.json"
+last_generated_config_path = "/var/lib/samaris/asc/last-generated-config.toml"

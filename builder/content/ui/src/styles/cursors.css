@@ -1,0 +1,120 @@
+/* ── Samaris OS Custom Cursors ── */
+/* Theme-aware via CSS custom properties. Light = default, dark = html[data-theme="dark"]. */
+
+/* === Light theme — cursor image map === */
+html[data-cursor] {
+  --cursor-default:      url(/cursors/light/arrow.cur), default;
+  --cursor-pointer:      url(/cursors/light/hand.cur), pointer;
+  --cursor-text:         url(/cursors/light/ibeam.cur), text;
+  --cursor-crosshair:    url(/cursors/light/crosshair.cur), crosshair;
+  --cursor-help:         url(/cursors/light/help.cur), help;
+  --cursor-not-allowed:  url(/cursors/light/no.cur), not-allowed;
+  --cursor-move:         url(/cursors/light/sizeall.cur), move;
+  --cursor-ns-resize:    url(/cursors/light/sizens.cur), ns-resize;
+  --cursor-ew-resize:    url(/cursors/light/sizewe.cur), ew-resize;
+  --cursor-nwse-resize:  url(/cursors/light/sizenwse.cur), nwse-resize;
+  --cursor-nesw-resize:  url(/cursors/light/sizenesw.cur), nesw-resize;
+  --cursor-grab:         url(/cursors/light/hand.cur), grab;
+  --cursor-grabbing:     url(/cursors/light/hand.cur), grabbing;
+  --cursor-wait:         progress;
+  --cursor-progress:     progress;
+  --cursor-writing:      url(/cursors/light/nwpen.cur), default;
+  --cursor-person:       url(/cursors/light/person.cur), default;
+  --cursor-pin:          url(/cursors/light/pin.cur), default;
+  --cursor-col-resize:   url(/cursors/light/sizewe.cur), col-resize;
+  --cursor-row-resize:   url(/cursors/light/sizens.cur), row-resize;
+}
+
+/* === Dark theme overrides === */
+html[data-theme="dark"][data-cursor] {
+  --cursor-default:      url(/cursors/dark/arrow.cur), default;
+  --cursor-pointer:      url(/cursors/dark/hand.cur), pointer;
+  --cursor-text:         url(/cursors/dark/ibeam.cur), text;
+  --cursor-crosshair:    url(/cursors/dark/crosshair.cur), crosshair;
+  --cursor-help:         url(/cursors/dark/help.cur), help;
+  --cursor-not-allowed:  url(/cursors/dark/no.cur), not-allowed;
+  --cursor-move:         url(/cursors/dark/sizeall.cur), move;
+  --cursor-ns-resize:    url(/cursors/dark/sizens.cur), ns-resize;
+  --cursor-ew-resize:    url(/cursors/dark/sizewe.cur), ew-resize;
+  --cursor-nwse-resize:  url(/cursors/dark/sizenwse.cur), nwse-resize;
+  --cursor-nesw-resize:  url(/cursors/dark/sizenesw.cur), nesw-resize;
+  --cursor-grab:         url(/cursors/dark/hand.cur), grab;
+  --cursor-grabbing:     url(/cursors/dark/hand.cur), grabbing;
+  --cursor-wait:         progress;
+  --cursor-progress:     progress;
+  --cursor-writing:      url(/cursors/dark/nwpen.cur), default;
+  --cursor-person:       url(/cursors/dark/person.cur), default;
+  --cursor-pin:          url(/cursors/dark/pin.cur), default;
+  --cursor-col-resize:   url(/cursors/dark/sizewe.cur), col-resize;
+  --cursor-row-resize:   url(/cursors/dark/sizens.cur), row-resize;
+}
+
+/* === HTML cursor per active type === */
+html[data-cursor="default"]      { cursor: var(--cursor-default); }
+html[data-cursor="pointer"]      { cursor: var(--cursor-pointer); }
+html[data-cursor="text"]         { cursor: var(--cursor-text); }
+html[data-cursor="crosshair"]    { cursor: var(--cursor-crosshair); }
+html[data-cursor="help"]         { cursor: var(--cursor-help); }
+html[data-cursor="not-allowed"]  { cursor: var(--cursor-not-allowed); }
+html[data-cursor="move"]         { cursor: var(--cursor-move); }
+html[data-cursor="ns-resize"]    { cursor: var(--cursor-ns-resize); }
+html[data-cursor="ew-resize"]    { cursor: var(--cursor-ew-resize); }
+html[data-cursor="nwse-resize"]  { cursor: var(--cursor-nwse-resize); }
+html[data-cursor="nesw-resize"]  { cursor: var(--cursor-nesw-resize); }
+html[data-cursor="grab"]         { cursor: var(--cursor-grab); }
+html[data-cursor="grabbing"]     { cursor: var(--cursor-grabbing); }
+html[data-cursor="wait"]         { cursor: var(--cursor-wait); }
+html[data-cursor="progress"]     { cursor: var(--cursor-progress); }
+html[data-cursor="writing"]      { cursor: var(--cursor-writing); }
+html[data-cursor="person"]       { cursor: var(--cursor-person); }
+html[data-cursor="pin"]          { cursor: var(--cursor-pin); }
+html[data-cursor="col-resize"]   { cursor: var(--cursor-col-resize); }
+html[data-cursor="row-resize"]   { cursor: var(--cursor-row-resize); }
+
+/* === Universal inheritance — prevents native cursors from leaking === */
+html[data-cursor] * { cursor: inherit !important; }
+
+/* === Preserved cursor zones — use custom .cur via var() === */
+
+/* Resize handles */
+html[data-cursor] .samaris-resize-n,
+html[data-cursor] .samaris-resize-s { cursor: var(--cursor-ns-resize) !important; }
+html[data-cursor] .samaris-resize-e,
+html[data-cursor] .samaris-resize-w { cursor: var(--cursor-ew-resize) !important; }
+html[data-cursor] .samaris-resize-ne,
+html[data-cursor] .samaris-resize-sw { cursor: var(--cursor-nesw-resize) !important; }
+html[data-cursor] .samaris-resize-nw,
+html[data-cursor] .samaris-resize-se { cursor: var(--cursor-nwse-resize) !important; }
+
+/* Window header */
+html[data-cursor] .samaris-window-header { cursor: var(--cursor-grab) !important; }
+html[data-cursor] .samaris-window-header:active,
+html[data-cursor] .samaris-window.dragging .samaris-window-header { cursor: var(--cursor-grabbing) !important; }
+html[data-cursor] .samaris-window-header.not-draggable { cursor: var(--cursor-default) !important; }
+
+/* Window control dots */
+html[data-cursor] .samaris-window-control { cursor: var(--cursor-pointer) !important; }
+
+/* Text inputs — kept native for now (no custom .cur for text on inputs makes sense) */
+html[data-cursor] input[type="text"],
+html[data-cursor] input[type="search"],
+html[data-cursor] input[type="password"],
+html[data-cursor] input[type="email"],
+html[data-cursor] input[type="url"],
+html[data-cursor] input:not([type]),
+html[data-cursor] textarea,
+html[data-cursor] [contenteditable] { cursor: text !important; }
+
+/* === Legacy shell (window.css) preserved zones === */
+html[data-cursor] .win__resize--n,
+html[data-cursor] .win__resize--s { cursor: var(--cursor-ns-resize) !important; }
+html[data-cursor] .win__resize--e,
+html[data-cursor] .win__resize--w { cursor: var(--cursor-ew-resize) !important; }
+html[data-cursor] .win__resize--ne,
+html[data-cursor] .win__resize--sw { cursor: var(--cursor-nesw-resize) !important; }
+html[data-cursor] .win__resize--nw,
+html[data-cursor] .win__resize--se { cursor: var(--cursor-nwse-resize) !important; }
+html[data-cursor] .win__title { cursor: var(--cursor-grab) !important; }
+html[data-cursor] .win__title:active { cursor: var(--cursor-grabbing) !important; }
+html[data-cursor] .win__dot--close,
+html[data-cursor] .win__dot--max { cursor: var(--cursor-pointer) !important; }

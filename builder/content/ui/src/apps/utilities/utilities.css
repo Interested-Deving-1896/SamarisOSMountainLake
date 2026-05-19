@@ -1,0 +1,254 @@
+.utilities {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(34, 197, 94, 0.06), transparent 22%),
+    radial-gradient(circle at top right, rgba(59, 130, 246, 0.06), transparent 24%),
+    linear-gradient(180deg, #f9fbfd 0%, #f3f6fa 100%);
+  color: #162538;
+}
+
+/* ── Hero ── */
+.utilities__hero {
+  flex-shrink: 0; padding: 22px 28px 0;
+}
+.utilities__heroBadge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(255,255,255,0.86); border: 1px solid rgba(15,23,42,0.06);
+  color: #2563eb; font-size: 12px; font-weight: 700;
+}
+.utilities__hero h1 {
+  margin: 12px 0 6px; font-size: 28px; font-weight: 780; line-height: 1.08;
+}
+.utilities__hero p {
+  color: #66788b; font-size: 14px; line-height: 1.5;
+}
+
+/* ── Layout ── */
+.utilities__layout {
+  flex: 1; min-height: 0; display: flex; overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.uts-sidebar {
+  width: 200px; flex-shrink: 0; overflow-y: auto;
+  padding: 12px 6px 24px;
+  border-right: 1px solid rgba(20,33,61,0.06);
+  background: rgba(255,255,255,0.28);
+}
+.uts-sidebar__item {
+  width: 100%; height: 36px; padding: 0 12px; border: 0; border-radius: 10px;
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 650; color: #4b5563;
+  text-align: left; transition: background 120ms, color 120ms;
+}
+.uts-sidebar__item:hover { background: rgba(59,130,246,0.06); color: #1f2937; }
+.uts-sidebar__item--active { background: rgba(59,130,246,0.1); color: #2563eb; }
+.uts-sidebar__icon { flex-shrink: 0; width: 20px; display: flex; justify-content: center; }
+
+/* ── Content ── */
+.utilities__content {
+  flex: 1; min-width: 0; overflow-y: auto;
+  padding: 18px 28px 48px;
+}
+.utilities__content > * { margin-bottom: 20px; }
+.utilities__content > *:last-child { margin-bottom: 0; }
+
+/* ── Panel ── */
+.utilities__panel {
+  border-radius: 18px;
+  border: 1px solid rgba(20,33,61,0.08);
+  background: rgba(255,255,255,0.84);
+  box-shadow: 0 12px 26px rgba(15,23,42,0.06);
+}
+.utilities__panelHead {
+  padding: 16px 18px 10px;
+}
+.utilities__panelTitle {
+  font-size: 15px; font-weight: 730; color: #132235;
+}
+.utilities__panelSubtitle {
+  margin-top: 4px; font-size: 12px; color: #6b7d90;
+}
+.utilities__panelBody {
+  padding: 0 18px 18px;
+}
+
+/* ── Monitor Grid ── */
+.uts-monitorGrid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;
+  padding-bottom: 14px;
+}
+.uts-monitorCard {
+  padding: 16px; border-radius: 16px;
+  background: rgba(246,248,252,0.9); border: 1px solid rgba(20,33,61,0.06);
+}
+.uts-monitorCard--wide { grid-column: span 2; }
+.uts-monitorLabel {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #7b8ea3;
+}
+.uts-monitorValue {
+  margin-top: 6px; font-size: 22px; font-weight: 760; color: #132235;
+}
+.uts-monitorSub {
+  margin-top: 2px; font-size: 12px; color: #6b7d90;
+}
+
+/* ── Process Table ── */
+.uts-processTable {
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid rgba(20,33,61,0.06);
+  background: rgba(255,255,255,0.7);
+  max-height: 360px; overflow-y: auto;
+}
+.uts-processHead, .uts-processRow {
+  display: grid;
+  grid-template-columns: 1.2fr 80px 80px 90px 90px 150px;
+  gap: 10px; align-items: center; padding: 11px 14px;
+}
+.uts-processHead {
+  position: sticky; top: 0; z-index: 2;
+  background: rgba(248,250,252,0.96);
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.07em; color: #6b7280;
+  border-bottom: 1px solid rgba(20,33,61,0.05);
+}
+.uts-processRow {
+  border-top: 1px solid rgba(20,33,61,0.04); font-size: 12px;
+}
+.uts-processActions { display: flex; gap: 4px; }
+.uts-processSortable { user-select: none; }
+.uts-processSortable:hover { color: #2563eb; }
+
+/* ── Buttons ── */
+.uts-btn {
+  height: 30px; padding: 0 12px; border-radius: 8px; font-size: 11px;
+  font-weight: 680; border: 1px solid rgba(20,33,61,0.1);
+  background: rgba(255,255,255,0.8); color: #334155;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+  transition: background 120ms, border-color 120ms;
+}
+.uts-btn:hover { background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.2); }
+.uts-btn--icon { width: 30px; padding: 0; justify-content: center; flex-shrink: 0; }
+.uts-btn--danger { color: #dc2626; border-color: rgba(220,38,38,0.15); }
+.uts-btn--danger:hover { background: rgba(248,113,113,0.1); }
+.uts-btn--primary {
+  background: linear-gradient(135deg, #2563eb, #14b8a6); color: #fff; border-color: transparent;
+}
+.uts-btn:disabled { opacity: 0.45; cursor: default; }
+
+/* ── Storage ── */
+.uts-storageBar {
+  height: 10px; border-radius: 999px; background: rgba(148,163,184,0.15);
+  overflow: hidden; margin-top: 8px;
+}
+.uts-storageBarFill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, #2563eb, #14b8a6);
+  transition: width 400ms ease;
+}
+.uts-diskRow {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 11px 14px; border-radius: 12px;
+  background: rgba(246,248,252,0.7); border: 1px solid rgba(20,33,61,0.05);
+}
+.uts-diskMain { display: flex; align-items: center; gap: 10px; }
+.uts-diskTitle { font-size: 13px; font-weight: 680; color: #203247; }
+.uts-diskMeta { font-size: 11px; color: #6b7d90; margin-top: 1px; }
+.uts-diskSize { font-size: 13px; font-weight: 700; color: #203247; }
+
+/* ── Status Card ── */
+.uts-statusCard {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 16px; border-radius: 14px;
+  background: rgba(246,248,252,0.9); border: 1px solid rgba(20,33,61,0.06);
+}
+.uts-statusCardIcon {
+  width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
+  background: rgba(37,99,235,0.08); flex-shrink: 0;
+}
+.uts-statusCardInfo { flex: 1; min-width: 0; }
+.uts-statusCardLabel { font-size: 13px; font-weight: 680; color: #203247; }
+.uts-statusCardValue { font-size: 12px; color: #6b7d90; margin-top: 2px; }
+
+/* ── Toggle ── */
+.uts-toggle {
+  width: 46px; height: 28px; border: 0; border-radius: 999px;
+  padding: 2px; background: rgba(120,134,158,0.32);
+  display: flex; align-items: center; cursor: pointer; flex-shrink: 0;
+  transition: background 200ms ease;
+}
+.uts-toggle--on { background: #2563eb; justify-content: flex-end; }
+.uts-toggleKnob {
+  width: 24px; height: 24px; border-radius: 50%; background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+}
+
+/* ── Switch Row ── */
+.uts-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; padding: 12px 0;
+  border-top: 1px solid rgba(20,33,61,0.05);
+}
+.uts-row:first-child { border-top: 0; }
+.uts-rowLabel { font-size: 13px; font-weight: 680; color: #203247; }
+.uts-rowHint { font-size: 11px; color: #6b7d90; margin-top: 1px; }
+
+/* ── Input ── */
+.uts-input {
+  height: 32px; padding: 0 12px; border-radius: 8px;
+  border: 1px solid rgba(20,33,61,0.12); background: rgba(255,255,255,0.8);
+  color: #1f2937; font-size: 12px; width: 220px;
+  outline: none; transition: border-color 150ms;
+}
+.uts-input:focus { border-color: rgba(37,99,235,0.3); }
+
+/* ── Empty ── */
+.utilities__empty {
+  padding: 32px 16px; text-align: center; font-size: 13px; color: #7b8ea3;
+}
+
+/* ── Dark theme ── */
+html[data-theme="dark"] .utilities {
+  background:
+    radial-gradient(circle at top left, rgba(34,197,94,0.08), transparent 22%),
+    radial-gradient(circle at top right, rgba(59,130,246,0.1), transparent 24%),
+    linear-gradient(180deg, #0b1522 0%, #0d1a2b 100%);
+  color: #edf3fa;
+}
+html[data-theme="dark"] .utilities__panel,
+html[data-theme="dark"] .uts-monitorCard,
+html[data-theme="dark"] .uts-statusCard,
+html[data-theme="dark"] .uts-diskRow,
+html[data-theme="dark"] .uts-processTable,
+html[data-theme="dark"] .uts-processHead,
+html[data-theme="dark"] .uts-btn {
+  background: rgba(15,23,42,0.82); border-color: rgba(255,255,255,0.08); color: #e2e8f0;
+}
+html[data-theme="dark"] .utilities__panelTitle,
+html[data-theme="dark"] .uts-monitorValue,
+html[data-theme="dark"] .uts-diskTitle,
+html[data-theme="dark"] .uts-diskSize,
+html[data-theme="dark"] .uts-rowLabel,
+html[data-theme="dark"] .uts-statusCardLabel { color: #e5edf7; }
+html[data-theme="dark"] .utilities__panelSubtitle,
+html[data-theme="dark"] .uts-monitorLabel,
+html[data-theme="dark"] .uts-monitorSub,
+html[data-theme="dark"] .uts-diskMeta,
+html[data-theme="dark"] .uts-rowHint,
+html[data-theme="dark"] .uts-statusCardValue,
+html[data-theme="dark"] .utilities__empty { color: #9fb1c2; }
+html[data-theme="dark"] .utilities__heroBadge { background: rgba(15,23,42,0.82); border-color: rgba(255,255,255,0.08); }
+html[data-theme="dark"] .uts-sidebar { background: rgba(17,24,39,0.5); border-color: rgba(148,163,184,0.08); }
+html[data-theme="dark"] .uts-sidebar__item { color: #9ca3af; }
+html[data-theme="dark"] .uts-sidebar__item:hover { background: rgba(96,165,250,0.08); color: #d1d5db; }
+html[data-theme="dark"] .uts-sidebar__item--active { background: rgba(96,165,250,0.12); color: #60a5fa; }
+html[data-theme="dark"] .uts-row { border-color: rgba(148,163,184,0.08); }
+html[data-theme="dark"] .uts-processSortable:hover { color: #60a5fa; }
+html[data-theme="dark"] .uts-storageBar { background: rgba(148,163,184,0.15); }
+html[data-theme="dark"] .uts-input { background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.08); color: #e2e8f0; }

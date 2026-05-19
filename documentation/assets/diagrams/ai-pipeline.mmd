@@ -1,0 +1,19 @@
+flowchart LR
+    subgraph Input
+        TXT["✏️ Text Input"]
+        MIC["🎤 Microphone"]
+    end
+    subgraph Processing
+        STT["Whisper STT"]
+        LLM["Qwen3 1.7B (llama-server)"]
+        TTS["OuteTTS 0.2 + WavTokenizer"]
+    end
+    subgraph Output
+        RESP["📝 Response Text"]
+        AUDIO["🔊 Audio Playback"]
+    end
+    TXT --> LLM
+    MIC --> STT --> LLM
+    LLM --> RESP
+    LLM --> TTS --> AUDIO
+    AUDIO -.->|"Voice Mode Loop"| MIC

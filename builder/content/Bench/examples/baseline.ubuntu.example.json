@@ -1,0 +1,35 @@
+{
+  "source": "imported",
+  "import_label": "Ubuntu 24.04 — Mac Mini 2012",
+  "imported_at": "2026-05-17T10:30:00Z",
+  "measurement_date": "2026-05-14T16:00:00Z",
+  "hardware": {
+    "class": "old_intel_desktop",
+    "model": "Mac Mini 2012",
+    "cpu": "Intel Core i5-3210M",
+    "cpu_cores": 2,
+    "ram_gb": 4,
+    "gpu": "Intel HD Graphics 4000",
+    "storage_type": "ssd",
+    "arch": "x86_64"
+  },
+  "os": {
+    "name": "Ubuntu",
+    "version": "24.04 LTS"
+  },
+  "overall": {
+    "score": 8800,
+    "badge": "Excellent"
+  },
+  "category_scores": {
+    "system": 85,
+    "ui": 82,
+    "memory": 84,
+    "kernel": 78,
+    "graphics": 82,
+    "ai": 0,
+    "browser": 80,
+    "filesystem": 88,
+    "stability": 90
+  }
+}

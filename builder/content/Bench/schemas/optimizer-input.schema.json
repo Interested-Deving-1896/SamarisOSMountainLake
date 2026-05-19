@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OptimizerInput",
+  "description": "Input data for the Samaris OS AutoOptimizer module",
+  "type": "object",
+  "required": ["fitness_score", "bottlenecks", "recommendations", "unstable_metrics"],
+  "properties": {
+    "fitness_score": { "type": "number" },
+    "bottlenecks": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "area": { "type": "string" },
+          "action": { "type": "string" },
+          "priority": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "expected_impact": { "type": "string" }
+        }
+      }
+    },
+    "unstable_metrics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "candidate_config_constraints": {
+      "type": "object"
+    },
+    "regression_alerts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric": { "type": "string" },
+          "previous_score": { "type": "number" },
+          "current_score": { "type": "number" },
+          "delta": { "type": "number" }
+        }
+      }
+    },
+    "run_id": { "type": "string" },
+    "hardware_class": { "type": "string" }
+  }
+}

@@ -1,0 +1,28 @@
+[Unit]
+Description=VOLT Display Manager — Initial Detection & Apply
+Documentation=https://samaris.dev/docs/volt-display-manager
+After=graphical-session.target nodm.service
+Wants=graphical-session.target
+PartOf=graphical-session.target
+
+# This service must run AFTER Xorg is fully available.
+# It requires:
+#   - DISPLAY environment variable
+#   - XAUTHORITY for the session user
+#   - xrandr in PATH
+#
+# Do NOT run this as an early-boot system service.
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=%h/.Xauthority
+ExecStart=/usr/local/bin/volt-display-manager --apply
+Restart=no
+RemainAfterExit=no
+
+# Safety: if apply fails, safe mode is triggered automatically
+# inside the binary. No ExecStopPost needed.
+
+[Install]
+WantedBy=graphical-session.target

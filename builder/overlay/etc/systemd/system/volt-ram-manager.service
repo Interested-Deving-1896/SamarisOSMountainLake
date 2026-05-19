@@ -1,0 +1,21 @@
+[Unit]
+Description=Volt RAM Manager — Deterministic Memory Manager
+Documentation=https://samaris.tech/docs/ram-manager
+After=volt-kernel-b.service
+Before=volt-kernel.service
+Wants=volt-kernel-b.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/start-ram-manager.sh
+Restart=on-failure
+RestartSec=1
+Nice=-10
+LimitNOFILE=65536
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/volt/ram-manager
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

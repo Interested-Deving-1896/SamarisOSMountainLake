@@ -1,0 +1,39 @@
+[storage]
+path = "/var/lib/samaris/bench"
+max_history = 100
+
+[runner]
+default_mode = "quick"
+ci_regression_threshold = 500
+
+[watch]
+interval_seconds = 5
+
+[collectors]
+# All available collectors. SBP-based collectors gracefully fail if their
+# respective daemon sockets are unavailable.
+enabled = ["system", "boot", "memory", "cpu", "disk", "network", "vrm", "vgm", "dwp", "vum", "kernel_b"]
+
+# UI, Orbit, Peregrine, and Finder collectors run via Kernel A proxy.
+# They are triggered through the REST API, not directly from the CLI.
+collector_proxy_url = "http://127.0.0.1:9999/api/bench/ui"
+
+[scorer]
+# Must sum to 1.0
+system_weight = 0.20
+ui_weight = 0.20
+memory_weight = 0.15
+kernel_weight = 0.10
+graphics_weight = 0.10
+ai_weight = 0.10
+browser_weight = 0.05
+filesystem_weight = 0.05
+stability_weight = 0.05
+
+[badges]
+legendary_min = 9500
+exceptional_min = 9000
+excellent_min = 8500
+very_good_min = 8000
+good_min = 7000
+needs_optimization_min = 6000

@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Volt
+Description=SAMARIS OS boot splash
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/volt
+ScriptFile=/usr/share/plymouth/themes/volt/volt.script

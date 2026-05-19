@@ -1,0 +1,78 @@
+[worker_pool]
+scheduler = "cooperative_adaptive_priority"
+preemption_enabled = true
+yield_budget_us = 50
+idle_timeout_ms = 5000
+max_workers_cap = 48
+safe_mode = true
+integration_mode = "standalone"
+
+[worker_pool.scaling]
+mode = "adaptive"
+scale_up_queue_factor = 2.0
+scale_down_queue_factor = 1.0
+scale_up_cpu_threshold = 0.80
+scale_down_cpu_threshold = 0.30
+scale_cooldown_ms = 5000
+# Set to 0 to let hardware probe determine values
+min_workers_override = 0
+max_workers_override = 0
+
+[worker_pool.hardware]
+detect_cpu_cores = true
+detect_ram = true
+detect_thermal = true
+default_cpu_cores = 4
+
+[worker_pool.reservations]
+desktop_min_workers = 1
+system_min_workers = 1
+orbit_default_fraction = 0.75
+orbit_burst_window_ms = 100
+orbit_burst_cooldown_ms = 2000
+orbit_max_consecutive_bursts = 3
+
+[worker_pool.desktop_guard]
+enabled = true
+frame_budget_ms = 16
+latency_guard_ms = 8
+reduce_orbit_on_frame_pressure = true
+reduce_background_on_frame_pressure = true
+
+[worker_pool.priorities]
+orbit = "critical"
+desktop = "high"
+electron = "normal"
+kernel_a = "high"
+kernel_b = "high"
+vrm = "idle"
+vum = "normal"
+vgm = "normal"
+background = "idle"
+
+[worker_pool.fairness]
+aging_enabled = true
+aging_after_ms = 200
+starvation_limit_ms = 1000
+priority_boost_on_starvation = true
+
+[worker_pool.thermal]
+thermal_backoff_enabled = true
+scale_down_on_thermal_pressure = true
+disable_orbit_burst_on_thermal_pressure = true
+
+[adapters]
+enabled = true
+kernel_b = "stub"
+kernel_a = "stub"
+desktop = "stub"
+orbit = "stub"
+vrm = "stub"
+vum = "stub"
+vgm = "stub"
+
+[metrics]
+enabled = true
+latency_histograms = true
+utilization_tracking = true
+queue_tracking = true

@@ -1,0 +1,38 @@
+.samaris-window-body {
+  position: relative;
+  z-index: 8;
+  height: calc(100% - 58px);
+  display: grid;
+  grid-template-columns: 198px 1fr;
+  min-height: 0;
+}
+
+.samaris-window.no-sidebar .samaris-window-body {
+  grid-template-columns: 1fr;
+}
+
+.samaris-window-content {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 20px;
+  scrollbar-width: none;
+}
+
+.samaris-window-content::-webkit-scrollbar {
+  display: none;
+}
+
+.samaris-window-content--flush {
+  padding: 0;
+}
+
+.win__fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 700;
+}

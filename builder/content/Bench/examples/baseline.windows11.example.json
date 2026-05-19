@@ -1,0 +1,35 @@
+{
+  "source": "imported",
+  "import_label": "Windows 11 — Mac Mini 2012",
+  "imported_at": "2026-05-17T10:30:00Z",
+  "measurement_date": "2026-05-15T09:00:00Z",
+  "hardware": {
+    "class": "old_intel_desktop",
+    "model": "Mac Mini 2012",
+    "cpu": "Intel Core i5-3210M",
+    "cpu_cores": 2,
+    "ram_gb": 4,
+    "gpu": "Intel HD Graphics 4000",
+    "storage_type": "ssd",
+    "arch": "x86_64"
+  },
+  "os": {
+    "name": "Windows 11",
+    "version": "24H2"
+  },
+  "overall": {
+    "score": 8100,
+    "badge": "Very Good"
+  },
+  "category_scores": {
+    "system": 82,
+    "ui": 75,
+    "memory": 78,
+    "kernel": 80,
+    "graphics": 85,
+    "ai": 0,
+    "browser": 88,
+    "filesystem": 76,
+    "stability": 85
+  }
+}

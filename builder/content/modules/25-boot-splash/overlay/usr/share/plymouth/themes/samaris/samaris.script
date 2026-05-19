@@ -1,0 +1,90 @@
+# Samaris OS Plymouth theme
+
+Window.SetBackgroundTopColor(0.85, 0.91, 0.98);
+Window.SetBackgroundBottomColor(0.91, 0.95, 0.99);
+
+logo.image = Image("logo.png").Scale(192, 192);
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetOpacity(1);
+
+label.image = Image.Text("Samaris OS 1.0 Mountain Lake Alpha One", 0.07, 0.20, 0.36);
+label.sprite = Sprite(label.image);
+label.sprite.SetOpacity(0.86);
+
+spinner.image0 = Image("animation-0001.png").Scale(40, 40);
+spinner.image1 = Image("animation-0004.png").Scale(40, 40);
+spinner.image2 = Image("animation-0007.png").Scale(40, 40);
+spinner.image3 = Image("animation-0010.png").Scale(40, 40);
+spinner.image4 = Image("animation-0013.png").Scale(40, 40);
+spinner.image5 = Image("animation-0016.png").Scale(40, 40);
+spinner.image6 = Image("animation-0019.png").Scale(40, 40);
+spinner.image7 = Image("animation-0022.png").Scale(40, 40);
+spinner.image8 = Image("animation-0025.png").Scale(40, 40);
+spinner.image9 = Image("animation-0028.png").Scale(40, 40);
+spinner.image10 = Image("animation-0031.png").Scale(40, 40);
+spinner.image11 = Image("animation-0034.png").Scale(40, 40);
+spinner.sprite = Sprite(spinner.image0);
+spinner.sprite.SetOpacity(1);
+spinner.frame = 0;
+
+fun refresh_callback ()
+  {
+    width = Window.GetWidth();
+    height = Window.GetHeight();
+    center_x = Window.GetX() + width / 2;
+    center_y = Window.GetY() + height / 2;
+
+    logo.sprite.SetPosition(center_x - logo.image.GetWidth() / 2,
+                            center_y - logo.image.GetHeight() / 2 - 56,
+                            10);
+    label.sprite.SetPosition(center_x - label.image.GetWidth() / 2,
+                             center_y + 72,
+                             20);
+    spinner.sprite.SetPosition(center_x - spinner.image0.GetWidth() / 2,
+                               center_y + 118,
+                               20);
+
+    spinner.frame = (spinner.frame + 1) % 12;
+
+    if (spinner.frame == 0)
+      spinner.sprite.SetImage(spinner.image0);
+    else if (spinner.frame == 1)
+      spinner.sprite.SetImage(spinner.image1);
+    else if (spinner.frame == 2)
+      spinner.sprite.SetImage(spinner.image2);
+    else if (spinner.frame == 3)
+      spinner.sprite.SetImage(spinner.image3);
+    else if (spinner.frame == 4)
+      spinner.sprite.SetImage(spinner.image4);
+    else if (spinner.frame == 5)
+      spinner.sprite.SetImage(spinner.image5);
+    else if (spinner.frame == 6)
+      spinner.sprite.SetImage(spinner.image6);
+    else if (spinner.frame == 7)
+      spinner.sprite.SetImage(spinner.image7);
+    else if (spinner.frame == 8)
+      spinner.sprite.SetImage(spinner.image8);
+    else if (spinner.frame == 9)
+      spinner.sprite.SetImage(spinner.image9);
+    else if (spinner.frame == 10)
+      spinner.sprite.SetImage(spinner.image10);
+    else
+      spinner.sprite.SetImage(spinner.image11);
+  }
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun display_message_callback (text)
+  {
+  }
+
+Plymouth.SetDisplayMessageFunction(display_message_callback);
+
+fun quit_callback ()
+  {
+    logo.sprite.SetOpacity(1);
+    label.sprite.SetOpacity(0.86);
+    spinner.sprite.SetOpacity(1);
+  }
+
+Plymouth.SetQuitFunction(quit_callback);

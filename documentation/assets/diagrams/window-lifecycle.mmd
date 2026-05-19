@@ -1,0 +1,17 @@
+stateDiagram-v2
+    [*] --> Opening
+    Opening --> Focused: animation ends
+    Focused --> Dragging: pointer down on title
+    Dragging --> Focused: pointer up
+    Focused --> Resizing: pointer down on edge
+    Resizing --> Focused: pointer up
+    Focused --> Minimizing: click yellow dot
+    Minimizing --> Minimized: genie animation
+    Minimized --> Restoring: click dock icon
+    Restoring --> Focused: genie reverse
+    Focused --> Maximized: double-click title
+    Maximized --> Focused: double-click title
+    Focused --> Snapped: drag to edge
+    Snapped --> Focused: drag away
+    Focused --> Closing: click red dot
+    Closing --> [*]: animation

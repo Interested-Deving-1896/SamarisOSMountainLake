@@ -1,0 +1,167 @@
+.samaris-hero {
+  min-height: 132px;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255,255,255,0.52), transparent 34%),
+    radial-gradient(circle at 92% 22%, hsla(var(--accent-h), 100%, 70%, 0.22), transparent 38%),
+    linear-gradient(145deg, var(--panel-strong), var(--panel));
+  border: 1px solid var(--panel-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.28);
+}
+
+.samaris-hero h1 {
+  margin: 0;
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
+.samaris-hero p {
+  margin: 10px 0 0;
+  max-width: 540px;
+  color: var(--text-soft);
+  font-size: 13px;
+  line-height: 1.48;
+}
+
+.samaris-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.samaris-card {
+  min-height: 112px;
+  border-radius: 20px;
+  padding: 15px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.samaris-card b {
+  display: block;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+}
+
+.samaris-card span {
+  display: block;
+  margin-top: 8px;
+  color: var(--text-soft);
+  font-size: 12px;
+  line-height: 1.38;
+}
+
+.samaris-metric-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(90px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.samaris-metric {
+  border-radius: 18px;
+  padding: 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+}
+
+.samaris-metric strong {
+  display: block;
+  font-size: 24px;
+  letter-spacing: -0.06em;
+}
+
+.samaris-metric small {
+  display: block;
+  color: var(--text-soft);
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.samaris-file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+  gap: 14px;
+}
+
+.samaris-file-card {
+  min-height: 92px;
+  border-radius: 18px;
+  padding: 13px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.samaris-file-icon {
+  width: 42px;
+  height: 34px;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 30% 15%, rgba(255,255,255,0.90), transparent 35%),
+    hsla(var(--accent-h), 90%, 64%, 0.42);
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.30);
+}
+
+.samaris-file-card span {
+  color: var(--text-soft);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.samaris-settings-list {
+  display: grid;
+  gap: 10px;
+}
+
+.samaris-setting {
+  min-height: 58px;
+  border-radius: 18px;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.samaris-setting b {
+  font-size: 13px;
+}
+
+.samaris-setting span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-soft);
+  font-size: 12px;
+}
+
+.samaris-toggle {
+  width: 46px;
+  height: 26px;
+  border-radius: 999px;
+  background: hsla(var(--accent-h), 90%, 58%, 0.32);
+  border: 1px solid var(--panel-border);
+  position: relative;
+}
+
+.samaris-toggle::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 2px;
+  right: 2px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.16);
+}

@@ -1,0 +1,101 @@
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                       ║
+║                      CONFIGURATION ISO — A LA CARTE                                   ║
+║              Choisissez exactement ce que vous voulez dans votre ISO                   ║
+║                                                                                       ║
+╠══════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                       ║
+║  ┌─ BASE SYSTEM (obligatoire) ─────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  Debian Trixie (Linux 6.x)                     ~500 MB     [required]      |  ║
+║  |  [X]  Systemd + core utilities                      ~200 MB     [required]      |  ║
+║  |  [X]  Xorg + openbox + nodm + Plymouth              ~150 MB     [required]      |  ║
+║  |  [X]  Boot splash + theme                           ~25 MB      [required]      |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ ARCHITECTURES ──────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  x86_64  (Intel/AMD)                           ~3.2 GB     [recommended]    |  ║
+║  |  [X]  aarch64 (ARM64 / Apple M)                     ~3.2 GB     [+3.2 GB duo]    |  ║
+║  |                                                                                  |  ║
+║  |   ISO universelle (les deux)                     ~6.4 GB     [-30% dedup]        |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ AI MODULES (inference locale, offline) ──────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  Orbit LLM        (Qwen3 1.7B Q8_0)       ~1.7 GB     [LLM local]          |  ║
+║  |  [X]  Whisper STT      (ggml-small)             ~465 MB     [Reconnaissance]     |  ║
+║  |  [X]  OuteTTS          (OuteTTS-0.2-500M)       ~512 MB     [Synthese vocale]    |  ║
+║  |  [X]  WavTokenizer     (Large-75-F16)           ~124 MB     [Vocodeur audio]     |  ║
+║  |                                                                                  |  ║
+║  |  Total AI : ~2.8 GB                                                               |  ║
+║  |  [ ]  Telecharger les modeles apres installation (ISO plus leger)                |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ VOLT DAEMONS (Rust — binaires natifs) ───────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  Kernel B   (Tesseract Engine)         ~15 MB     [requis — coeur systeme]  |  ║
+║  |  [X]  VRM        (RAM Manager)              ~10 MB     [compression ZSTD]        |  ║
+║  |  [X]  VGM        (GPU Manager)              ~10 MB     [acceleration GPU]        |  ║
+║  |  [X]  VUM        (USB Manager)              ~10 MB     [cache journalise]        |  ║
+║  |  [X]  DWP        (Dynamic Worker Pool)      ~10 MB     [ordonnanceur adaptatif]  |  ║
+║  |  [X]  ASC        (Adaptive Config)          ~10 MB     [detection materielle]    |  ║
+║  |  [ ]  Bench      (Performance Testing)      ~10 MB     [optionnel]               |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ SYSTEM SERVICES ─────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  NetworkManager + bluetooth + ModemManager     ~40 MB     [reseau]           |  ║
+║  |  [X]  CUPS + Avahi                                   ~30 MB     [impression]      |  ║
+║  |  [X]  upower + acpid                                ~10 MB     [gestion energie]  |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ DESKTOP & UI ────────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [X]  Volt Desktop UI (React)                      ~5 MB      [interface]        |  ║
+║  |  [X]  Browser Chromium (Electron)                  ~350 MB    [navigateur]        |  ║
+║  |  [X]  Demo module                                  ~2 MB      [demo]             |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ BUILD OPTIONS ───────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  Mode :  (O)  Build complet (toutes les etapes)                                   |  ║
+║  |          ( )  Reprendre depuis le dernier checkpoint                              |  ║
+║  |          ( )  A partir de l'etape :  [________________]                           |  ║
+║  |          ( )  Une seule etape      :  [________________]                          |  ║
+║  |                                                                                  |  ║
+║  |  [X]  Utiliser Docker pour la cross-compilation                                   |  ║
+║  |  [ ]  Forcer la reconstruction (ignorer les checkpoints)                         |  ║
+║  |  [ ]  Simulation (dry-run — montre ce qui serait execute)                        |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ BUILD SUMMARY ───────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  Architecture :      x86_64 + aarch64             ~6.4 GB                         |  ║
+║  |  AI modules :        LLM + STT + TTS              +2.8 GB                         |  ║
+║  |  Volt daemons :      6/7 (sans Bench)             +65 MB                          |  ║
+║  |  Services :          Network + CUPS + PWR         +80 MB                          |  ║
+║  |  Desktop + UI :      Desktop + Browser            +360 MB                         |  ║
+║  |  Base system :                                    +900 MB                         |  ║
+║  |  ------------------------------------------------------------                    |  ║
+║  |  TOTAL ISO SIZE ESTIME :                       ~10.6 GB                           |  ║
+║  |                                                                                  |  ║
+║  |  8 GB USB    [XX] trop petit                                                     |  ║
+║  |  16 GB USB   [VV] parfait                                                        |  ║
+║  |  32 GB USB   [VV] confortable                                                     |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌──────────────────────────────────────────────────────────────────────────────────┐  ║
+║  |  [F1] Sauver config    [F2] Charger config    [F3] Reinitialiser               |  ║
+║  |  [ENTER] LANCER LA CONSTRUCTION               [ESC] ANNULER                    |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝

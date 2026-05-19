@@ -1,0 +1,186 @@
+.dnd-sheet__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 400000;
+  display: grid;
+  place-items: center;
+  background: rgba(9, 15, 26, 0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.dnd-sheet {
+  width: min(520px, calc(100vw - 32px));
+  max-height: min(620px, calc(100vh - 48px));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto auto auto;
+  gap: 14px;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(248, 250, 252, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.28);
+  color: #172033;
+}
+
+.dnd-sheet__header,
+.dnd-sheet__actions,
+.dnd-sheet__item,
+.dnd-sheet__conflictControls {
+  display: flex;
+  align-items: center;
+}
+
+.dnd-sheet__header {
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.dnd-sheet__title {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.dnd-sheet__subtitle,
+.dnd-sheet__meta,
+.dnd-sheet__more {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.dnd-sheet__close {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.06);
+  color: #475569;
+  cursor: pointer;
+}
+
+.dnd-sheet__items {
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  gap: 8px;
+}
+
+.dnd-sheet__item {
+  gap: 10px;
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(241, 245, 249, 0.86);
+  border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.dnd-sheet__glyph {
+  width: 34px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background: rgba(37, 99, 235, 0.12);
+  color: #1d4ed8;
+  font-size: 9px;
+  font-weight: 900;
+}
+
+.dnd-sheet__name {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.dnd-sheet__sectionTitle {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #334155;
+}
+
+.dnd-sheet__conflictControls {
+  gap: 6px;
+}
+
+.dnd-sheet__seg,
+.dnd-sheet__button {
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(255, 255, 255, 0.78);
+  color: #334155;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.dnd-sheet__seg {
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.dnd-sheet__seg--active {
+  background: rgba(37, 99, 235, 0.12);
+  border-color: rgba(37, 99, 235, 0.32);
+  color: #1d4ed8;
+}
+
+.dnd-sheet__warnings {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.13);
+  color: #92400e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dnd-sheet__actions {
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.dnd-sheet__button {
+  min-height: 34px;
+  padding: 0 14px;
+  border-radius: 9px;
+  font-size: 12px;
+}
+
+.dnd-sheet__button--primary {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+html[data-theme="dark"] .dnd-sheet {
+  background: rgba(15, 23, 42, 0.96);
+  border-color: rgba(148, 163, 184, 0.18);
+  color: #e5edf7;
+}
+
+html[data-theme="dark"] .dnd-sheet__item {
+  background: rgba(30, 41, 59, 0.84);
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+html[data-theme="dark"] .dnd-sheet__seg,
+html[data-theme="dark"] .dnd-sheet__button,
+html[data-theme="dark"] .dnd-sheet__close {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: #dbeafe;
+}
+
+html[data-theme="dark"] .dnd-sheet__button--primary {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}
+

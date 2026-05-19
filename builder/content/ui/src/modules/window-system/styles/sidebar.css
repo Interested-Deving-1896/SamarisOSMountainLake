@@ -1,0 +1,47 @@
+.samaris-window-sidebar {
+  padding: 16px 12px;
+  border-right: 1px solid rgba(255,255,255,0.16);
+  overflow: hidden;
+}
+
+.samaris-sidebar-label {
+  margin: 4px 10px 10px;
+  color: var(--text-faint);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.samaris-nav-item {
+  width: 100%;
+  height: 38px;
+  border-radius: 14px;
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-soft);
+  font-size: 13px;
+  font-weight: 760;
+  margin-bottom: 5px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.samaris-nav-item.active,
+.samaris-nav-item:hover {
+  color: var(--text);
+  background: var(--panel);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.20);
+}
+
+.samaris-nav-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: hsla(var(--accent-h), 92%, 62%, 0.95);
+  box-shadow: 0 0 18px hsla(var(--accent-h), 92%, 62%, 0.58);
+}

@@ -1,0 +1,16 @@
+{
+  "name": "samaris-backend-audit",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Comprehensive backend audit for Samaris OS — services, handlers, performance, security",
+  "main": "index.js",
+  "scripts": {
+    "audit": "node index.js",
+    "audit:report": "node index.js --output results/report.md",
+    "test": "node --test __tests__/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

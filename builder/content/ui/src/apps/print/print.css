@@ -1,0 +1,12 @@
+.print{height:100%;display:grid;grid-template-rows:auto auto 1fr;padding:22px;gap:16px;background:linear-gradient(180deg,rgba(255,255,255,.84),rgba(247,250,255,.76))}
+.print__hero,.print__row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.print__title{font-size:28px;font-weight:800;color:var(--text)}
+.print__note,.print__rowMeta{font-size:12px;color:var(--muted)}
+.print__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;min-height:0}
+.print__panel{border-radius:22px;border:1px solid var(--stroke);background:rgba(255,255,255,.76);padding:16px;display:grid;grid-template-rows:auto 1fr;gap:12px;min-height:0}
+.print__panelTitle,.print__rowTitle{font-weight:750;color:var(--text)}
+.print__list{overflow:auto;display:grid;gap:10px}
+.print__row{padding:12px;border-radius:16px;background:rgba(255,255,255,.68);border:1px solid rgba(44,72,112,.06)}
+.print__btn{height:38px;padding:0 14px;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.82);color:var(--text);font-weight:700}
+.print__btn--primary{background:#2f6df6;color:#fff;border-color:rgba(47,109,246,.18)}
+html[data-theme="dark"] .print,html[data-theme="dark"] .print__panel,html[data-theme="dark"] .print__row,html[data-theme="dark"] .print__btn{background:rgba(17,24,39,.74);border-color:rgba(148,163,184,.12)}

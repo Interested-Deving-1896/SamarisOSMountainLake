@@ -1,0 +1,112 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BenchResult",
+  "description": "A single benchmark result from Samaris OS Bench",
+  "type": "object",
+  "required": ["version", "timestamp", "run", "hardware", "environment", "os", "overall", "category_scores", "metrics", "comparison", "optimizer"],
+  "properties": {
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "run": {
+      "type": "object",
+      "required": ["run_id", "mode", "duration_seconds", "iterations", "warmup_iterations", "median_score", "mean_score", "min_score", "max_score", "stddev_score", "confidence", "reliability_flags"],
+      "properties": {
+        "run_id": { "type": "string" },
+        "mode": { "type": "string", "enum": ["quick", "full", "stress", "watch", "ci"] },
+        "duration_seconds": { "type": "number", "minimum": 0 },
+        "iterations": { "type": "integer", "minimum": 1 },
+        "warmup_iterations": { "type": "integer", "minimum": 0 },
+        "cold_run": { "type": "boolean" },
+        "median_score": { "type": "number" },
+        "mean_score": { "type": "number" },
+        "min_score": { "type": "number" },
+        "max_score": { "type": "number" },
+        "stddev_score": { "type": "number", "minimum": 0 },
+        "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+        "reliability_flags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "required": ["class", "cpu", "cpu_cores", "ram_gb", "gpu", "storage_type", "arch"],
+      "properties": {
+        "class": { "type": "string", "enum": ["low_power_usb", "old_intel_desktop", "modern_laptop", "high_end_desktop", "raspberry_pi", "virtual_machine", "unknown"] },
+        "model": { "type": "string" },
+        "cpu": { "type": "string" },
+        "cpu_cores": { "type": "integer" },
+        "ram_gb": { "type": "number" },
+        "gpu": { "type": "string" },
+        "storage_type": { "type": "string", "enum": ["nvme", "ssd", "hdd", "usb", "unknown"] },
+        "storage_model": { "type": "string" },
+        "arch": { "type": "string" },
+        "battery_or_ac": { "type": "string" },
+        "thermal_state": { "type": "string" }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "display_resolution": { "type": "string" },
+        "display_scale": { "type": "number" },
+        "network_connected": { "type": "boolean" },
+        "running_from_usb": { "type": "boolean" },
+        "running_in_vm": { "type": "boolean" },
+        "power_mode": { "type": "string", "enum": ["ac", "battery"] },
+        "temperature_celsius": { "type": "number" },
+        "kernel_version": { "type": "string" },
+        "system_uptime_seconds": { "type": "number" }
+      }
+    },
+    "os": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "build": { "type": "string" },
+        "commit_hash": { "type": ["string", "null"] },
+        "release_channel": { "type": "string", "enum": ["alpha", "beta", "stable", "dev"] },
+        "boot_mode": { "type": "string" }
+      }
+    },
+    "overall": {
+      "type": "object",
+      "properties": {
+        "score": { "type": "number" },
+        "score_out_of": { "type": "integer" },
+        "normalized_score": { "type": "number" },
+        "badge": { "type": "string" },
+        "validity": { "type": "string" }
+      }
+    },
+    "category_scores": {
+      "type": "object",
+      "properties": {
+        "system":    { "type": "number" },
+        "ui":        { "type": "number" },
+        "memory":    { "type": "number" },
+        "kernel":    { "type": "number" },
+        "graphics":  { "type": "number" },
+        "ai":        { "type": "number" },
+        "browser":   { "type": "number" },
+        "filesystem": { "type": "number" },
+        "stability": { "type": "number" }
+      }
+    },
+    "metrics": { "type": "object" },
+    "comparison": {
+      "type": "object",
+      "properties": {
+        "baselines": { "type": "array", "items": { "type": "object" } },
+        "comparison_validity": { "type": "string", "enum": ["none", "same_hardware", "reference_only"] }
+      }
+    },
+    "optimizer": {
+      "type": "object",
+      "properties": {
+        "fitness_score": { "type": "number" },
+        "bottlenecks": { "type": "array", "items": { "type": "string" } },
+        "recommendations": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

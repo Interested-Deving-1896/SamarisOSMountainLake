@@ -1,0 +1,50 @@
+{
+  "name": "samaris-desktop",
+  "version": "1.0.0-alpha",
+  "description": "Samaris OS — Native WebOS Desktop Shell",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "NODE_ENV=development electron .",
+    "build:linux": "electron-builder --linux AppImage",
+    "build:mac": "electron-builder --mac dmg"
+  },
+  "dependencies": {
+    "node-pty": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^3.6.0",
+    "electron": "^42.1.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "tech.samaris.desktop",
+    "productName": "Samaris OS",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "launcher.js",
+      "ipc/**/*",
+      "services/**/*",
+      "!node_modules"
+    ],
+    "linux": {
+      "target": [{"target": "AppImage", "arch": ["x64"]}],
+      "category": "Utility",
+      "icon": "../overlay/opt/volt/desktop/app/brand/samaris-logo.png",
+      "extraResources": [
+        {"from": "../volt-kernel", "to": "kernel", "filter": ["**/*", "!node_modules"]}
+      ]
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "../overlay/opt/volt/desktop/app/brand/samaris-logo.png",
+      "extraResources": [
+        {"from": "../volt-kernel", "to": "kernel", "filter": ["**/*", "!node_modules"]}
+      ]
+    }
+  }
+}

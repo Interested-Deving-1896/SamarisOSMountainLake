@@ -1,0 +1,11 @@
+{
+  "name": "samaris-bench",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Samaris OS Bench — React UI (runs inside Samaris OS frontend)",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "lucide-react": "^0.300.0"
+  }
+}

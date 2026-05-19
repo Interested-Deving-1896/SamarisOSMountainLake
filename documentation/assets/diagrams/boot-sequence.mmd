@@ -1,0 +1,34 @@
+sequenceDiagram
+    participant BIOS as BIOS/UEFI
+    participant GRUB as GRUB
+    participant Kernel as Linux Kernel
+    participant systemd as systemd
+    participant ASC as Volt ASC
+    participant VKB as Kernel B
+    participant VRMD as VRM
+    participant DWP as DWP
+    participant VGM as VGM
+    participant VUM as VUM
+    participant KA as Kernel A (Node)
+    participant DM as Display Manager
+    participant Electron as Electron Desktop
+
+    BIOS->>GRUB: Boot ISO
+    GRUB->>Kernel: Load vmlinuz + initrd
+    Kernel->>systemd: Start init
+    systemd->>ASC: volt-asc.service (oneshot)
+    ASC-->>ASC: Detect hardware
+    ASC-->>ASC: Generate config
+    systemd->>VKB: volt-kernel-b.service
+    VKB-->>VKB: Start Tesseract Engine
+    systemd->>VRMD: volt-ram-manager.service
+    systemd->>DWP: volt-worker-pool.service
+    systemd->>VGM: volt-gpu-manager.service
+    systemd->>VUM: volt-usb-manager.service
+    systemd->>KA: volt-kernel.service (After=network)
+    KA-->>KA: Start WS server :9999
+    KA-->>KA: Init Volt Unifier
+    systemd->>DM: lightdm + Xorg
+    DM->>Electron: samaris-xsession
+    Electron->>KA: WebSocket connect
+    Note over Electron,KA: Desktop ready

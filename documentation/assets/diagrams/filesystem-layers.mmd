@@ -1,0 +1,27 @@
+flowchart LR
+    subgraph UI["React UI"]
+        FS["useFs() / fileSystemClient"]
+    end
+    subgraph Service["Kernel Service Layer"]
+        KF["kernelFs"]
+        HTTP["httpFs (HTTP Bridge)"]
+        MOCK["mockFs"]
+    end
+    subgraph Kernel["Kernel A — Node.js"]
+        KFS["fileSystem.js"]
+        HANDLER["fs.js handler"]
+    end
+    subgraph Real["Real Filesystem"]
+        LOCAL["Local / Overlay"]
+        VIRTUAL[".volt/system/"]
+        USER["User Home"]
+    end
+    UI --> FS
+    FS --> KF
+    KF --> HANDLER
+    HANDLER --> KFS
+    KFS --> LOCAL
+    KFS --> VIRTUAL
+    KFS --> USER
+    KF --> HTTP
+    KF -.->|"fallback"| MOCK

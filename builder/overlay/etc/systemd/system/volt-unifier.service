@@ -1,0 +1,15 @@
+[Unit]
+Description=Volt Unifier — Kernel A Integrated Health Watchdog
+Documentation=https://samaris.tech/docs/unifier
+After=volt-kernel.service
+Requires=volt-kernel.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/volt-unifier-watchdog
+Restart=on-failure
+RestartSec=2
+Environment=VOLT_UNIFIER_HEALTH_URL=http://127.0.0.1:9999/api/unifier/health
+
+[Install]
+WantedBy=multi-user.target

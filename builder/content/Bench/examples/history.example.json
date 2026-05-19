@@ -1,0 +1,29 @@
+{
+  "entries": [
+    {
+      "timestamp": "2026-05-17T10:00:00Z",
+      "run_id": "bench-2026-05-17-100000",
+      "mode": "full",
+      "score": 9225,
+      "badge": "Exceptional",
+      "duration_seconds": 120,
+      "hardware_class": "old_intel_desktop",
+      "category_scores": { "system": 88, "ui": 98, "memory": 94, "kernel": 90, "graphics": 86, "ai": 85, "browser": 82, "filesystem": 92, "stability": 96 },
+      "reliability_flags": [],
+      "result_path": "/var/lib/samaris/bench/bench-2026-05-17-100000.json"
+    },
+    {
+      "timestamp": "2026-05-16T14:30:00Z",
+      "run_id": "bench-2026-05-16-143000",
+      "mode": "quick",
+      "score": 9100,
+      "badge": "Exceptional",
+      "duration_seconds": 25,
+      "hardware_class": "old_intel_desktop",
+      "category_scores": { "system": 85, "ui": 96, "memory": 92, "kernel": 88, "graphics": 84, "ai": 80, "browser": 78, "filesystem": 90, "stability": 95 },
+      "reliability_flags": [],
+      "result_path": "/var/lib/samaris/bench/bench-2026-05-16-143000.json"
+    }
+  ],
+  "max_entries": 100
+}

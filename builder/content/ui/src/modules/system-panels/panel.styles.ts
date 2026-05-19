@@ -1,0 +1,23 @@
+export const SYSTEM_PANEL_CLASSES = {
+  panel: "samaris-system-panel",
+  section: "samaris-system-panel__section",
+  heading: "samaris-system-panel__heading",
+  row: "samaris-system-panel__row",
+  rowLabel: "samaris-system-panel__rowLabel",
+  rowMeta: "samaris-system-panel__rowMeta",
+  rowIcon: "samaris-system-panel__rowIcon",
+  rowText: "samaris-system-panel__rowText",
+  switch: "samaris-system-panel__switch",
+  switchActive: "is-active",
+  networkList: "samaris-system-panel__networkList",
+  networkRow: "samaris-system-panel__networkRow",
+  statusPill: "samaris-system-panel__statusPill",
+  actions: "samaris-system-panel__actions",
+  button: "samaris-system-panel__button",
+  buttonPrimary: "samaris-system-panel__button--primary",
+  input: "samaris-system-panel__input",
+  helper: "samaris-system-panel__helper",
+  slider: "samaris-system-panel__slider",
+  sliderFill: "samaris-system-panel__sliderFill",
+  sliderInput: "samaris-system-panel__sliderInput"
+} as const;

@@ -1,0 +1,24 @@
+[Unit]
+Description=Volt Display Manager — Automatic Display Detection & Apply
+Documentation=https://samaris.dev/docs/volt-display-manager
+After=nodm.service
+Before=volt-desktop.service
+Wants=volt-display-hotplug.service
+
+[Service]
+Type=oneshot
+User=user
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/user/.Xauthority
+Environment=VOLT_DISPLAY_LASTGOOD_PATH=/home/user/.local/state/samaris/display.lastgood.toml
+Environment=VOLT_DISPLAY_MANAGER_LOG=/tmp/volt-display-manager.log
+ExecStartPre=-/bin/sh -c 'for i in $(seq 1 30); do xrandr --query >/dev/null 2>&1 && break; sleep 1; done'
+ExecStartPre=-/usr/bin/xrandr --query
+ExecStart=/usr/bin/timeout 25 /usr/local/bin/start-display-manager.sh --config-path /home/user/.local/state/samaris/display.generated.toml --event-path /home/user/.local/state/samaris/display.event.json --apply
+TimeoutStartSec=30
+Restart=on-failure
+RestartSec=3
+RemainAfterExit=no
+
+[Install]
+WantedBy=graphical.target

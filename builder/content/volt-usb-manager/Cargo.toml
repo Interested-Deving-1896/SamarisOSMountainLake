@@ -1,0 +1,75 @@
+[package]
+name = "volt-usb-manager"
+version = "1.0.0-rc1"
+edition = "2021"
+description = "Samaris OS — Volt USB Manager — Journaled RAM-First Removable Storage Manager"
+
+[features]
+default = ["fuse", "compression", "journal", "writeback"]
+fuse = ["fuser"]
+compression = ["zstd", "lz4_flex"]
+journal = []
+writeback = []
+devtools = []
+compressed_volume = []
+udev = []
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive"] }
+parking_lot = "0.12"
+crossbeam = "0.8"
+dashmap = "6"
+bytes = "1"
+bitflags = "2"
+uuid = { version = "1", features = ["v4"] }
+sha2 = "0.10"
+crc32fast = "1"
+memmap2 = "0.9"
+once_cell = "1"
+smallvec = "1"
+zstd = { version = "0.13", optional = true }
+lz4_flex = { version = "0.11", optional = true }
+time = "0.3"
+nix = { version = "0.29", features = ["fs", "ioctl", "mman"] }
+glob = "0.3"
+fuser = { version = "0.15", optional = true }
+ctrlc = "3"
+
+[dev-dependencies]
+criterion = "0.5"
+tempfile = "3"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[[bench]]
+name = "read_cache_bench"
+harness = false
+
+[[bench]]
+name = "write_buffer_bench"
+harness = false
+
+[[bench]]
+name = "flush_bench"
+harness = false
+
+[[bench]]
+name = "journal_bench"
+harness = false
+
+[[bench]]
+name = "compression_bench"
+harness = false
+
+[[bench]]
+name = "sbp_usb_bench"
+harness = false

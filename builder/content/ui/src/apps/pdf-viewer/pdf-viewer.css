@@ -1,0 +1,7 @@
+.pdfv__canvasWrap { flex: 1; min-height: 0; overflow: auto; display: flex; justify-content: center; padding: 24px; }
+.pdfv__pageContainer { position: relative; box-shadow: 0 2px 12px rgba(0,0,0,0.12); line-height: 0; }
+.pdfv__canvas { display: block; }
+.pdfv__textLayer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; opacity: 0.5; }
+.pdfv__textLayer span { pointer-events: auto; cursor: text; }
+.pdfv__textLayer mark { background: rgba(255,255,0,0.4); }
+@keyframes pdfv-spin { to { transform: rotate(360deg); } }

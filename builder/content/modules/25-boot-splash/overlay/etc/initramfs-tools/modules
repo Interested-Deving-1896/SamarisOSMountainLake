@@ -1,0 +1,8 @@
+# Force early KMS for Plymouth in live USB/VM boots.
+drm
+drm_kms_helper
+virtio
+virtio_ring
+virtio_pci
+virtio_gpu
+vboxvideo

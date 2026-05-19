@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Samaris OS Website
+    url: https://samaris.tech
+    about: Official Samaris OS website with documentation and updates.
+  - name: Samaris OS Support
+    url: mailto:contact.samaris.os@gmail.com
+    about: Reach out to the maintainer directly for sensitive or private inquiries.

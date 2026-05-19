@@ -1,0 +1,19 @@
+sequenceDiagram
+    participant UI as React UI
+    participant WS as WebSocket
+    participant Router as Router
+    participant Handler as Handler
+    participant Service as Service
+    participant Daemon as Rust Daemon
+
+    UI->>WS: kernelClient.request({type, data})
+    WS->>Router: JSON message
+    Router->>Router: parse type, authorize
+    Router->>Handler: route(namespace)
+    Handler->>Service: service.method(payload)
+    Service->>Daemon: SBP request (Unix socket)
+    Daemon-->>Service: SBP response
+    Service-->>Handler: return result
+    Handler-->>Router: {type:".result", data:...}
+    Router-->>WS: JSON envelope
+    WS-->>UI: resolve promise

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+PREREQ="udev"
+
+prereqs()
+{
+	echo "${PREREQ}"
+}
+
+case ${1} in
+	prereqs)
+		prereqs
+		exit 0
+		;;
+esac
+
+SPLASH="true"
+
+for ARGUMENT in $(cat /proc/cmdline)
+do
+	case "${ARGUMENT}" in
+		splash*|plymouth.force-splash)
+			SPLASH="true"
+			;;
+
+		nosplash*|plymouth.enable=0)
+			SPLASH="false"
+			;;
+	esac
+done
+
+if [ "${SPLASH}" = "true" ]
+then
+	mkdir -m 0755 -p /run/plymouth
+	/usr/sbin/plymouthd --mode=boot \
+		--attach-to-session \
+		--pid-file=/run/plymouth/pid \
+		--graphical-boot \
+		--ignore-serial-consoles
+	/usr/bin/plymouth --show-splash
+	/usr/bin/plymouth message --text="Samaris OS 1.0 Mountain Lake Alpha One" || true
+fi

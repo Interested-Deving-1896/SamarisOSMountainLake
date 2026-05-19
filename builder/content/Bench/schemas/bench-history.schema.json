@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BenchHistory",
+  "description": "Historical benchmark runs",
+  "type": "object",
+  "required": ["entries", "max_entries"],
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["timestamp", "run_id", "mode", "score", "badge", "duration_seconds"],
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "run_id": { "type": "string" },
+          "mode": { "type": "string" },
+          "score": { "type": "number" },
+          "badge": { "type": "string" },
+          "duration_seconds": { "type": "number" },
+          "hardware_class": { "type": "string" },
+          "category_scores": {
+            "type": "object",
+            "properties": {
+              "system": { "type": "number" },
+              "ui": { "type": "number" },
+              "memory": { "type": "number" },
+              "kernel": { "type": "number" },
+              "graphics": { "type": "number" },
+              "ai": { "type": "number" },
+              "browser": { "type": "number" },
+              "filesystem": { "type": "number" },
+              "stability": { "type": "number" }
+            }
+          },
+          "reliability_flags": { "type": "array", "items": { "type": "string" } },
+          "result_path": { "type": "string" }
+        }
+      }
+    },
+    "max_entries": { "type": "integer", "minimum": 1 }
+  }
+}

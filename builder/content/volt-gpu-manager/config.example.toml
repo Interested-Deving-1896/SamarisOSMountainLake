@@ -1,0 +1,104 @@
+# ───────────────────────────────────────────────────────
+# Volt GPU Manager — Configuration Example
+# ───────────────────────────────────────────────────────
+# All values shown are the defaults unless noted.
+
+[gpu]
+# Backend type: "wgpu" (default), "vulkan", "metal", "null", "auto"
+backend = "wgpu"
+
+# Target frame budget in milliseconds (default: 16 = 60 FPS)
+frame_budget_ms = 16
+
+# ───────────────────────────────────────────────────────
+# VRAM Configuration
+# ───────────────────────────────────────────────────────
+[gpu.vram]
+# Maximum percentage of total VRAM that VGM will use (default: 90)
+max_vram_percent = 90
+
+# Reserved VRAM in MB for system use (default: 256)
+reserved_mb = 256
+
+# T1 active pool size in MB (default: 1024)
+t1_pool_size_mb = 1024
+
+# T2 compressed pool size in MB (default: 4096)
+t2_pool_size_mb = 4096
+
+# Scratch budget for restore operations in MB (default: 64)
+scratch_budget_mb = 64
+
+# ───────────────────────────────────────────────────────
+# Compression Settings
+# ───────────────────────────────────────────────────────
+[gpu.vram.compression]
+# Algorithm: "zstd" (default), "lz4", "none", "native_texture", "fallback"
+algorithm = "zstd"
+
+# Compression level (1-22, default: 3)
+level = 3
+
+# ───────────────────────────────────────────────────────
+# Deduplication Settings
+# ───────────────────────────────────────────────────────
+[gpu.vram.deduplication]
+# Enable content-based deduplication (default: false)
+enabled = false
+
+# Block size in bytes for dedup (default: 4096)
+block_size = 4096
+
+# ───────────────────────────────────────────────────────
+# Scheduler Settings
+# ───────────────────────────────────────────────────────
+[gpu.scheduler]
+# Maximum queue depth per priority level (default: 64)
+queue_depth = 64
+
+# Maximum inflight commands (default: 4)
+max_inflight = 4
+
+# ───────────────────────────────────────────────────────
+# Shader Cache Settings
+# ───────────────────────────────────────────────────────
+[gpu.shaders]
+# Maximum cache size in number of shader entries (default: 128)
+cache_size = 128
+
+# ───────────────────────────────────────────────────────
+# Compute Engine Settings
+# ───────────────────────────────────────────────────────
+[gpu.compute]
+# Maximum workgroups for compute dispatches (default: 65535)
+max_workgroups = 65535
+
+# ───────────────────────────────────────────────────────
+# Multi-GPU Settings
+# ───────────────────────────────────────────────────────
+[gpu.multi_gpu]
+# Mode: "single" (default), "multi", "auto"
+mode = "single"
+
+# ───────────────────────────────────────────────────────
+# Thermal Management Settings
+# ───────────────────────────────────────────────────────
+[gpu.thermal]
+# Temperature in °C at which throttling begins (default: 85.0)
+throttle_temp = 85.0
+
+# Temperature in °C at which emergency measures activate (default: 95.0)
+emergency_temp = 95.0
+
+# Sensor polling interval in milliseconds (default: 1000)
+poll_interval_ms = 1000
+
+# ───────────────────────────────────────────────────────
+# Quota Settings
+# ───────────────────────────────────────────────────────
+[gpu.quotas]
+# Maximum allocations per application (default: 1024)
+max_allocations = 1024
+
+# Maximum pinned memory in MB per application (default: 512)
+max_pinned_mb = 512

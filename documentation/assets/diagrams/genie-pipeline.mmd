@@ -1,0 +1,32 @@
+flowchart TB
+    subgraph Capture["Capture Phase"]
+        CLICK["User clicks Minimize"]
+        HTML2CANVAS["html2canvas screenshot"]
+        BITMAP["Captured Bitmap"]
+    end
+    subgraph Engine["Animation Engine"]
+        PHYSICS["GenieEngine<br/>Spring-Damper Physics"]
+        RENDERER["GenieRenderer<br/>WebGL Mesh 96×48"]
+        SHADER["Shader Pipeline<br/>Vertex → Fragment"]
+    end
+    subgraph FX["Post-Processing"]
+        SHADOW["Dynamic CSS drop-shadow"]
+        CHROMA["Chromatic Aberration"]
+        BLOOM["Bloom Glow (4-tap)"]
+        VIGNETTE["Vignette Darkening"]
+    end
+    subgraph End["End"]
+        HIDE["Window hidden"]
+        DOCK["Dock Icon bounce"]
+    end
+    CLICK --> HTML2CANVAS --> BITMAP
+    BITMAP --> RENDERER
+    PHYSICS --> SHADER
+    RENDERER --> SHADER
+    SHADER --> CHROMA
+    SHADER --> BLOOM
+    SHADER --> VIGNETTE
+    SHADOW -.-> RENDERER
+    CHROMA --> HIDE
+    BLOOM --> HIDE
+    HIDE --> DOCK

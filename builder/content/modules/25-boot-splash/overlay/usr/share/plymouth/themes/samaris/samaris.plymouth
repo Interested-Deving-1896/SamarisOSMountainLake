@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Samaris
+Description=Samaris OS custom boot theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/samaris
+ScriptFile=/usr/share/plymouth/themes/samaris/samaris.script

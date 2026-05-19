@@ -1,0 +1,201 @@
+.samaris-window {
+  position: absolute;
+  width: 720px;
+  height: 460px;
+  min-width: 380px;
+  min-height: 260px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.42), transparent 32%),
+    radial-gradient(circle at 18% 0%, rgba(255,255,255,0.56), transparent 30%),
+    radial-gradient(circle at 95% 12%, hsla(var(--accent-h), 100%, 72%, 0.16), transparent 38%),
+    radial-gradient(circle at 50% 100%, hsla(var(--accent-2-h), 100%, 72%, 0.07), transparent 42%),
+    var(--window-bg);
+  border: 1px solid var(--window-border);
+  backdrop-filter: blur(var(--blur-window)) saturate(1.55) contrast(1.03);
+  -webkit-backdrop-filter: blur(var(--blur-window)) saturate(1.55) contrast(1.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.72),
+    inset 24px 24px 70px rgba(255,255,255,0.14),
+    inset -24px -30px 60px hsla(var(--accent-h), 42%, 35%, 0.10),
+    0 36px 94px var(--window-shadow),
+    0 12px 34px rgba(0,0,0,0.08);
+  isolation: isolate;
+  contain: layout paint;
+  transition:
+    transform var(--normal) var(--ease),
+    opacity var(--normal) var(--ease),
+    left var(--slow) var(--ease),
+    top var(--slow) var(--ease),
+    width var(--slow) var(--ease),
+    height var(--slow) var(--ease),
+    box-shadow var(--normal) var(--ease),
+    border-color var(--normal) var(--ease);
+  will-change: transform, opacity, left, top, width, height, box-shadow;
+}
+
+.samaris-window.focused {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.84),
+    inset 24px 24px 70px rgba(255,255,255,0.18),
+    inset -24px -30px 60px hsla(var(--accent-h), 55%, 35%, 0.14),
+    0 48px 120px var(--window-shadow-focused),
+    0 0 0 1px hsla(var(--accent-h), 100%, 78%, 0.24),
+    0 0 54px hsla(var(--accent-h), 100%, 70%, 0.16);
+}
+
+.samaris-window.inactive {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.64),
+    inset 24px 24px 70px rgba(255,255,255,0.1),
+    inset -24px -30px 60px hsla(var(--accent-h), 42%, 35%, 0.08),
+    0 30px 76px var(--window-shadow),
+    0 10px 28px rgba(0,0,0,0.06);
+}
+
+.samaris-window::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.52), rgba(255,255,255,0.05) 30%, transparent 52%),
+    radial-gradient(circle at 88% 8%, rgba(255,255,255,0.34), transparent 12%),
+    linear-gradient(315deg, hsla(var(--accent-h), 70%, 34%, 0.10), transparent 44%);
+  mix-blend-mode: screen;
+}
+
+.samaris-window::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  z-index: 4;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.22);
+  pointer-events: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 0 18px rgba(255,255,255,0.08);
+}
+
+.samaris-window.minimized {
+  opacity: 0;
+  transform: translateY(80px) scale(0.86);
+  pointer-events: none;
+}
+
+.samaris-window.opening {
+  animation: samaris-window-open var(--normal) var(--ease) both;
+}
+
+.samaris-window.closing {
+  animation: samaris-window-close var(--fast) ease both;
+}
+
+.samaris-window.dragging,
+.samaris-window.resizing {
+  transition:
+    transform var(--fast) var(--ease),
+    opacity var(--fast) ease,
+    box-shadow var(--normal) var(--ease),
+    border-color var(--normal) var(--ease);
+}
+
+.samaris-window.hidden {
+  display: none;
+}
+
+.samaris-window.maximized {
+  left: 14px !important;
+  top: 70px !important;
+  width: calc(100vw - 28px) !important;
+  height: calc(100vh - 150px) !important;
+}
+
+.samaris-window.snapped-left {
+  left: 14px !important;
+  top: 70px !important;
+  width: calc(50vw - 22px) !important;
+  height: calc(100vh - 150px) !important;
+}
+
+.samaris-window.snapped-right {
+  left: calc(50vw + 8px) !important;
+  top: 70px !important;
+  width: calc(50vw - 22px) !important;
+  height: calc(100vh - 150px) !important;
+}
+
+html[data-theme="dark"] .samaris-window {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.10), transparent 30%),
+    radial-gradient(circle at 18% 0%, rgba(255,255,255,0.12), transparent 28%),
+    radial-gradient(circle at 95% 12%, hsla(var(--accent-h), 100%, 72%, 0.08), transparent 36%),
+    radial-gradient(circle at 50% 100%, hsla(var(--accent-2-h), 100%, 72%, 0.04), transparent 40%),
+    var(--window-bg);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.16),
+    inset 20px 20px 56px rgba(255,255,255,0.03),
+    inset -22px -24px 48px rgba(0,0,0,0.18),
+    0 28px 76px var(--window-shadow),
+    0 10px 28px rgba(0,0,0,0.22);
+}
+
+html[data-theme="dark"] .samaris-window.focused {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.20),
+    inset 20px 20px 56px rgba(255,255,255,0.04),
+    inset -22px -24px 48px rgba(0,0,0,0.18),
+    0 36px 92px var(--window-shadow-focused),
+    0 0 0 1px hsla(var(--accent-h), 100%, 78%, 0.12),
+    0 0 36px hsla(var(--accent-h), 100%, 70%, 0.08);
+}
+
+html[data-theme="dark"] .samaris-window.inactive {
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.14),
+    inset 18px 18px 48px rgba(255,255,255,0.025),
+    inset -20px -22px 46px rgba(0,0,0,0.16),
+    0 24px 64px rgba(0,0,0,0.42),
+    0 8px 24px rgba(0,0,0,0.18);
+}
+
+html[data-theme="dark"] .samaris-window::before {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 30%, transparent 52%),
+    radial-gradient(circle at 88% 8%, rgba(255,255,255,0.08), transparent 12%),
+    linear-gradient(315deg, hsla(var(--accent-h), 70%, 34%, 0.05), transparent 44%);
+}
+
+html[data-theme="dark"] .samaris-window::after {
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 0 14px rgba(255,255,255,0.03);
+}
+
+@keyframes samaris-window-open {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.972);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes samaris-window-close {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.982);
+  }
+}

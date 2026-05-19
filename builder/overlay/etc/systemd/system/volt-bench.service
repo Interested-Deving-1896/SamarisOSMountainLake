@@ -1,0 +1,18 @@
+[Unit]
+Description=Samaris OS Bench — one-shot performance benchmark
+After=volt-kernel-b.service volt-ram-manager.service volt-gpu-manager.service
+Before=volt-desktop.service
+Documentation=file:/opt/volt/bench/README.md
+
+[Service]
+Type=oneshot
+ExecStart=/opt/volt/bin/bench --ci
+WorkingDirectory=/opt/volt/bench
+Environment=RUST_LOG=info
+Environment=BENCH_STORAGE_PATH=/var/lib/samaris/bench
+Nice=0
+IOSchedulingClass=best-effort
+IOSchedulingPriority=4
+
+[Install]
+WantedBy=multi-user.target

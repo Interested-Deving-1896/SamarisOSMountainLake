@@ -1,0 +1,960 @@
+:root {
+  --samaris-onboarding-ease: cubic-bezier(.18, .84, .22, 1);
+  --samaris-onboarding-blue: #0077ff;
+  --samaris-onboarding-blue2: #58c7ff;
+  --samaris-onboarding-deep: rgba(7, 58, 122, 0.98);
+  --samaris-onboarding-text: rgba(6, 37, 84, 0.96);
+  --samaris-onboarding-soft: rgba(6, 37, 84, 0.7);
+  --samaris-onboarding-faint: rgba(6, 37, 84, 0.46);
+  --samaris-onboarding-font: "SF Pro Text", "Segoe UI Variable Text", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.samaris-onboarding {
+  position: fixed;
+  inset: 0;
+  z-index: 200000;
+  overflow: hidden;
+  color: var(--samaris-onboarding-text);
+  background: #8ed4ff;
+  user-select: none;
+  font-family: var(--samaris-onboarding-font);
+  transition: opacity 260ms var(--samaris-onboarding-ease), transform 260ms var(--samaris-onboarding-ease);
+}
+
+.samaris-onboarding--entering {
+  opacity: 0;
+}
+
+.samaris-onboarding--completed {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.01);
+}
+
+.samaris-onboarding__wallpaper,
+.samaris-onboarding__veil,
+.samaris-onboarding__mist {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.samaris-onboarding__wallpaper {
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.028);
+  filter: saturate(1.1);
+  animation: samaris-onboarding-breathe 18s ease-in-out infinite alternate;
+}
+
+.samaris-onboarding__veil {
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 255, 255, 0.5), transparent 28%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(239, 249, 255, 0.12), rgba(219, 239, 255, 0.1));
+  backdrop-filter: blur(20px) saturate(1.08);
+  -webkit-backdrop-filter: blur(20px) saturate(1.08);
+}
+
+.samaris-onboarding__mist {
+  background:
+    radial-gradient(circle at 24% 24%, rgba(255, 255, 255, 0.22), transparent 22%),
+    radial-gradient(circle at 78% 16%, rgba(88, 199, 255, 0.14), transparent 24%),
+    radial-gradient(circle at 52% 72%, rgba(255, 255, 255, 0.12), transparent 36%);
+  animation: samaris-onboarding-drift 20s ease-in-out infinite alternate;
+}
+
+.samaris-onboarding__shell {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+}
+
+.samaris-onboarding__screenFrame {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  opacity: 1;
+  animation: samaris-onboarding-screen-in 620ms var(--samaris-onboarding-ease) backwards;
+}
+
+.samaris-onboarding__screenFrame.is-back {
+  animation: samaris-onboarding-screen-in-back 520ms var(--samaris-onboarding-ease) backwards;
+}
+
+.samaris-onboarding__intro {
+  width: min(880px, 100%);
+  text-align: center;
+  padding-bottom: 72px;
+  transform: scale(.92);
+}
+
+/* ── Big hero logo (Welcome screen) ── */
+.samaris-onboarding__heroLogo {
+  margin: 0 auto 12px;
+  width: 180px;
+  height: 180px;
+  display: grid;
+  place-items: center;
+}
+
+.samaris-onboarding__heroLogoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Small logo (inner screens) ── */
+.samaris-onboarding__smallLogo {
+  margin: 0 auto 10px;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+}
+
+.samaris-onboarding__smallLogoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Back button (top-left of card) ── */
+.samaris-onboarding__cardBack {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.42);
+  background: rgba(255,255,255,.18);
+  color: var(--samaris-onboarding-deep);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 180ms, transform 180ms;
+}
+
+.samaris-onboarding__cardBack:hover {
+  background: rgba(255,255,255,.34);
+  transform: scale(1.05);
+}
+
+/* ── Navigation row (forward button centered) ── */
+.samaris-onboarding__navRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.samaris-onboarding__glyph {
+  display: none;
+}
+
+.samaris-onboarding__heroTitle,
+.samaris-onboarding__brandTitle,
+.samaris-onboarding__title {
+  margin: 0;
+  color: var(--samaris-onboarding-deep);
+  font-weight: 760;
+  letter-spacing: -0.056em;
+  line-height: 1.02;
+}
+
+.samaris-onboarding__heroTitle {
+  font-size: clamp(38px, 4.2vw, 60px);
+  margin-top: 4px;
+}
+
+.samaris-onboarding__heroSub {
+  margin-top: 6px;
+  color: rgba(9, 64, 140, 0.50);
+  font-size: clamp(16px, 1.6vw, 24px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.samaris-onboarding__brandTitle {
+  font-size: clamp(29px, 2.45vw, 40px);
+  font-weight: 730;
+  letter-spacing: -0.048em;
+}
+
+.samaris-onboarding__title {
+  font-size: clamp(36px, 3.2vw, 48px);
+}
+
+.samaris-onboarding__title.is-tight {
+  margin-top: 20px;
+}
+
+.samaris-onboarding__subtitle {
+  margin-top: 12px;
+  color: var(--samaris-onboarding-blue);
+  font-size: 23px;
+  font-weight: 520;
+  letter-spacing: -0.032em;
+  line-height: 1.32;
+}
+
+.samaris-onboarding__progressLine {
+  width: 92px;
+  height: 2px;
+  margin: 16px auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(0,118,255,.20) 24%, var(--samaris-onboarding-blue) 50%, rgba(0,118,255,.20) 76%, transparent);
+  box-shadow: 0 0 18px rgba(0,119,255,.22);
+}
+
+.samaris-onboarding__card {
+  position: relative;
+  width: min(880px, 100%);
+  min-height: min(760px, calc(100vh - 44px));
+  padding: clamp(28px, 5vw, 76px);
+  border-radius: 42px;
+  overflow: hidden;
+  transform: scale(.90);
+  background:
+    radial-gradient(circle at 50% -8%, rgba(255,255,255,.62) 0%, rgba(255,255,255,.22) 26%, transparent 48%),
+    radial-gradient(circle at 16% 18%, rgba(255,255,255,.34), transparent 32%),
+    radial-gradient(circle at 88% 22%, rgba(94,189,255,.14), transparent 36%),
+    radial-gradient(circle at 48% 78%, rgba(255,255,255,.14), transparent 44%),
+    linear-gradient(145deg, rgba(255,255,255,.30), rgba(255,255,255,.08) 50%, rgba(220,244,255,.12)),
+    rgba(246,252,255,.26);
+  border: 1px solid rgba(255,255,255,.54);
+  backdrop-filter: blur(48px) saturate(1.95) contrast(1.06);
+  -webkit-backdrop-filter: blur(48px) saturate(1.95) contrast(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.60),
+    inset 0 0 0 1px rgba(255,255,255,.10),
+    inset 26px 24px 72px rgba(255,255,255,.16),
+    inset -34px -38px 90px rgba(61,143,220,.10),
+    0 48px 140px rgba(6,61,132,.22),
+    0 0 80px rgba(0,119,255,.06);
+}
+
+.samaris-onboarding__card::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 33px;
+  border: 1px solid rgba(255,255,255,.20);
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.16), transparent 28%),
+    linear-gradient(300deg, rgba(0,119,255,.045), transparent 40%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -1px 0 rgba(39,128,220,.06),
+    inset 0 0 38px rgba(255,255,255,.055);
+  pointer-events: none;
+}
+
+.samaris-onboarding__screen {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100%;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.samaris-onboarding__panel {
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-content: center;
+}
+
+.samaris-onboarding__introPanel {
+  width: 100%;
+  padding-bottom: 160px;
+}
+
+.samaris-onboarding__lead {
+  max-width: 660px;
+  margin: 26px auto 0;
+  color: var(--samaris-onboarding-deep);
+  font-size: clamp(17px, 1.22vw, 21px);
+  line-height: 1.74;
+  font-weight: 450;
+  letter-spacing: -0.018em;
+}
+
+.samaris-onboarding__lead--compact {
+  margin-top: 16px;
+}
+
+.samaris-onboarding__lead.is-small {
+  max-width: 620px;
+  margin-top: 18px;
+  font-size: 15.5px;
+  line-height: 1.68;
+}
+
+.samaris-onboarding__arrow {
+  margin: 32px auto 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.62);
+  background:
+    radial-gradient(circle at 32% 18%, rgba(255,255,255,.78), rgba(255,255,255,.28) 46%, rgba(255,255,255,.10)),
+    linear-gradient(145deg, rgba(255,255,255,.28), rgba(225,246,255,.10)),
+    rgba(245,252,255,.18);
+  color: var(--samaris-onboarding-deep);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.80),
+    0 18px 44px rgba(19,97,190,.18),
+    0 0 28px rgba(0,118,255,.12);
+  transition: transform 180ms var(--samaris-onboarding-ease), box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.samaris-onboarding__arrow:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.86),
+    0 22px 48px rgba(19,97,190,.24),
+    0 0 30px rgba(0,118,255,.16);
+}
+
+.samaris-onboarding__arrow:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.samaris-onboarding__arrow--form {
+  margin-top: 16px;
+}
+
+.samaris-onboarding__features {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.samaris-onboarding__sep {
+  width: 1px;
+  height: 28px;
+  background: rgba(0, 74, 170, 0.22);
+}
+
+.samaris-onboarding__feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.22);
+  color: var(--samaris-onboarding-deep);
+  font-size: 13px;
+  font-weight: 560;
+}
+
+.samaris-onboarding__card.is-introCard .samaris-onboarding__lead {
+  max-width: 640px;
+  margin-top: 22px;
+  font-size: clamp(15.5px, 1.05vw, 19px);
+  line-height: 1.52;
+  font-weight: 650;
+  letter-spacing: -0.028em;
+}
+
+.samaris-onboarding__card.is-introCard .samaris-onboarding__lead--compact {
+  margin-top: 18px;
+}
+
+.samaris-onboarding__card.is-introCard .samaris-onboarding__features {
+  bottom: 6px;
+  gap: 28px;
+  flex-wrap: nowrap;
+  width: max-content;
+  max-width: calc(100% - 72px);
+}
+
+.samaris-onboarding__card.is-introCard .samaris-onboarding__feature {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--samaris-onboarding-deep);
+  font-size: 13px;
+  font-weight: 560;
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+}
+
+.samaris-onboarding__card.is-introCard .samaris-onboarding__feature svg {
+  flex: 0 0 auto;
+}
+
+.samaris-onboarding__form {
+  width: min(560px, 100%);
+  margin-top: 22px;
+  text-align: left;
+}
+
+.samaris-onboarding__field {
+  margin-bottom: 18px;
+}
+
+.samaris-onboarding__field label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--samaris-onboarding-deep);
+  font-size: 14px;
+  font-weight: 590;
+  letter-spacing: -0.018em;
+}
+
+.samaris-onboarding__field input {
+  width: 100%;
+  height: 54px;
+  padding: 0 22px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.42);
+  outline: none;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255,255,255,.42), transparent 34%),
+    radial-gradient(circle at 90% 18%, rgba(91,190,255,.09), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,.26), rgba(255,255,255,.06)),
+    rgba(246,252,255,.18);
+  color: var(--samaris-onboarding-deep);
+  font-size: 16px;
+  letter-spacing: -0.018em;
+  backdrop-filter: blur(34px) saturate(1.78) contrast(1.06);
+  -webkit-backdrop-filter: blur(34px) saturate(1.78) contrast(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 14px 12px 34px rgba(255,255,255,.09),
+    inset -14px -16px 36px rgba(0,119,255,.06),
+    0 18px 54px rgba(7,72,146,.09);
+}
+
+.samaris-onboarding__field input:focus {
+  border-color: rgba(0,119,255,.68);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.70),
+    inset 14px 12px 34px rgba(255,255,255,.18),
+    inset -14px -16px 36px rgba(0,119,255,.10),
+    0 0 0 5px rgba(0,119,255,.10),
+    0 20px 58px rgba(7,72,146,.16);
+}
+
+.samaris-onboarding__formAction {
+  text-align: center;
+  margin-top: 22px;
+}
+
+.samaris-onboarding__licenseBox,
+.samaris-onboarding__info {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  width: min(720px, 100%);
+  margin-top: 22px;
+  padding: 24px 26px 22px;
+  border-radius: 28px;
+  text-align: left;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(255,255,255,.42), transparent 34%),
+    radial-gradient(circle at 90% 18%, rgba(91,190,255,.09), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,.26), rgba(255,255,255,.06)),
+    rgba(246,252,255,.18);
+  border: 1px solid rgba(255,255,255,.42);
+  backdrop-filter: blur(34px) saturate(1.78) contrast(1.06);
+  -webkit-backdrop-filter: blur(34px) saturate(1.78) contrast(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 14px 12px 34px rgba(255,255,255,.09),
+    inset -14px -16px 36px rgba(0,119,255,.06),
+    0 18px 54px rgba(7,72,146,.09);
+}
+
+.samaris-onboarding__licenseBox::before,
+.samaris-onboarding__info::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(120deg, rgba(255,255,255,.18), transparent 30%),
+    repeating-linear-gradient(105deg, rgba(255,255,255,0) 0px, rgba(255,255,255,0) 18px, rgba(255,255,255,.04) 19px, rgba(255,255,255,0) 21px);
+}
+
+.samaris-onboarding__licenseBox::after,
+.samaris-onboarding__info::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  z-index: -1;
+  border-radius: 21px;
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+.samaris-onboarding__licenseScroll {
+  height: 172px;
+  overflow: auto;
+  padding-right: 16px;
+  color: var(--samaris-onboarding-deep);
+  font-size: 13.5px;
+  line-height: 1.74;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+.samaris-onboarding__licenseScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.samaris-onboarding__licenseScroll h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 720;
+  letter-spacing: -0.036em;
+}
+
+.samaris-onboarding__licenseScroll p {
+  margin: 0 0 14px;
+}
+
+.samaris-onboarding__checkbox {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--samaris-onboarding-deep);
+  font-size: 13.5px;
+  font-weight: 560;
+  cursor: pointer;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.045)),
+    rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.22);
+}
+
+.samaris-onboarding__checkbox input {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1.5px solid rgba(0,118,255,.46);
+  background: rgba(255,255,255,.36);
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.samaris-onboarding__checkbox input:checked {
+  background: var(--samaris-onboarding-blue);
+  border-color: var(--samaris-onboarding-blue);
+}
+
+.samaris-onboarding__checkbox input:checked::after {
+  content: "✓";
+  color: white;
+  font-weight: 950;
+  font-size: 14px;
+}
+
+.samaris-onboarding__info {
+  width: min(700px, 100%);
+  margin-top: 24px;
+  padding: 10px 28px;
+  border-radius: 26px;
+}
+
+.samaris-onboarding__infoRow {
+  min-height: 86px;
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  align-items: center;
+  gap: 24px;
+  color: var(--samaris-onboarding-deep);
+  font-size: 15.5px;
+  line-height: 1.58;
+  border-bottom: 1px solid rgba(50,100,160,.12);
+}
+
+.samaris-onboarding__infoRow:last-child {
+  border-bottom: 0;
+}
+
+.samaris-onboarding__infoIcon,
+.samaris-onboarding__tipIcon,
+.samaris-onboarding__bubble,
+.samaris-onboarding__done {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 18%, rgba(255,255,255,.52), transparent 38%),
+    radial-gradient(circle at 72% 82%, rgba(0,119,255,.07), transparent 44%),
+    rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.38);
+  backdrop-filter: blur(28px) saturate(1.65);
+  -webkit-backdrop-filter: blur(28px) saturate(1.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.44),
+    inset 14px 12px 32px rgba(255,255,255,.10),
+    inset -14px -16px 34px rgba(0,119,255,.07),
+    0 18px 44px rgba(0,119,255,.10);
+}
+
+.samaris-onboarding__infoIcon {
+  width: 52px;
+  height: 52px;
+  color: #2f7fff;
+}
+
+.samaris-onboarding__orbit {
+  position: relative;
+  width: 152px;
+  height: 152px;
+  margin: 12px auto 22px;
+  display: grid;
+  place-items: center;
+}
+
+.samaris-onboarding__ring,
+.samaris-onboarding__ring::before,
+.samaris-onboarding__ring::after {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0,118,255,.11);
+}
+
+.samaris-onboarding__ring::before {
+  content: "";
+  inset: 22px;
+}
+
+.samaris-onboarding__ring::after {
+  content: "";
+  inset: 44px;
+  border-color: rgba(255,255,255,.38);
+}
+
+.samaris-onboarding__orbitDot {
+  position: absolute;
+  left: 72px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0,132,255,.32);
+  transform-origin: 4px 80px;
+  animation: samaris-onboarding-orbit 3s linear infinite;
+}
+
+.samaris-onboarding__orbitDot.is-secondary {
+  animation-delay: -1.5s;
+  background: rgba(0,205,170,.30);
+}
+
+.samaris-onboarding__bubble {
+  width: 98px;
+  height: 98px;
+  color: #3f7ee8;
+}
+
+.samaris-onboarding__securing {
+  margin-top: 30px;
+  color: #1680ff;
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 24px;
+  font-weight: 720;
+}
+
+.samaris-onboarding__spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 6px solid rgba(22,128,255,.18);
+  border-top-color: #1680ff;
+  animation: samaris-onboarding-spin 820ms linear infinite;
+}
+
+.samaris-onboarding__ready.is-centered {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 42px auto 0;
+}
+
+.samaris-onboarding__done {
+  width: 118px;
+  height: 118px;
+  color: #0f9b73;
+  background:
+    radial-gradient(circle at 32% 18%, rgba(255,255,255,.82), transparent 36%),
+    radial-gradient(circle at 72% 82%, rgba(0,190,150,.16), transparent 42%),
+    rgba(118,230,204,.24);
+}
+
+.samaris-onboarding__done.is-large {
+  width: 136px;
+  height: 136px;
+}
+
+.samaris-onboarding__finalNote {
+  max-width: 680px;
+  margin: 32px auto 0;
+  color: var(--samaris-onboarding-deep);
+  font-size: 20px;
+  line-height: 1.68;
+  font-weight: 450;
+  letter-spacing: -0.03em;
+}
+
+.samaris-onboarding__tip {
+  width: min(640px, 100%);
+  margin: 34px auto 0;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 26px;
+  text-align: left;
+  color: var(--samaris-onboarding-deep);
+  font-size: 16.5px;
+  line-height: 1.62;
+}
+
+.samaris-onboarding__tipIcon {
+  width: 62px;
+  height: 62px;
+  color: #2f7fff;
+}
+
+.samaris-onboarding__primary {
+  min-width: 220px;
+  height: 54px;
+  margin-top: 36px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 32px;
+  background:
+    radial-gradient(circle at 35% 0%, rgba(255,255,255,.26), transparent 44%),
+    linear-gradient(180deg, rgba(22,138,255,.92), rgba(0,107,242,.90) 58%, rgba(0,95,222,.92));
+  color: white;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.36),
+    inset 0 -1px 0 rgba(0,30,120,.18),
+    0 22px 48px rgba(0,100,230,.26),
+    0 0 34px rgba(0,119,255,.18);
+  transition: transform 180ms var(--samaris-onboarding-ease), box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.samaris-onboarding__primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.42),
+    inset 0 -1px 0 rgba(0,30,120,.20),
+    0 30px 62px rgba(0,100,230,.32),
+    0 0 42px rgba(0,119,255,.22);
+}
+
+.samaris-onboarding__primary:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.samaris-onboarding__error {
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.22);
+  border: 1px solid rgba(255,255,255,.28);
+  color: rgba(200, 50, 50, 0.95);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.samaris-onboarding__meta {
+  margin-top: 14px;
+  color: var(--samaris-onboarding-faint);
+  font-size: 12px;
+  font-weight: 560;
+  letter-spacing: 0.02em;
+}
+
+.samaris-onboarding__dots {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 9px;
+}
+
+.samaris-onboarding__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.48);
+  box-shadow: 0 2px 10px rgba(0,70,160,.16);
+  transition: width 240ms var(--samaris-onboarding-ease), background 240ms var(--samaris-onboarding-ease);
+}
+
+.samaris-onboarding__dot.is-active {
+  width: 28px;
+  background: var(--samaris-onboarding-blue);
+}
+
+@keyframes samaris-onboarding-breathe {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.04); }
+}
+
+@keyframes samaris-onboarding-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -10px, 0); }
+}
+
+@keyframes samaris-onboarding-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes samaris-onboarding-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes samaris-onboarding-screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .samaris-onboarding__shell {
+    padding: 20px;
+  }
+
+  .samaris-onboarding__card {
+    width: 100%;
+    min-height: auto;
+    padding: 38px 30px 36px;
+    border-radius: 32px;
+  }
+
+  .samaris-onboarding__licenseBox,
+  .samaris-onboarding__info {
+    width: 100%;
+  }
+
+  .samaris-onboarding__features {
+    position: static;
+    transform: none;
+    margin-top: 32px;
+  }
+
+  .samaris-onboarding__introPanel {
+    padding-bottom: 0;
+  }
+
+  .samaris-onboarding__card.is-introCard .samaris-onboarding__features {
+    width: 100%;
+    max-width: none;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .samaris-onboarding__sep {
+    display: none;
+  }
+
+  .samaris-onboarding__tip {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
+
+@media (max-height: 780px) {
+  .samaris-onboarding__card {
+    transform: scale(.82);
+  }
+
+  .samaris-onboarding__intro {
+    transform: scale(.86);
+  }
+}
+
+/* ── Loading Spinner ── */
+.samaris-onboarding__loader {
+  position: relative; z-index: 3;
+  display: grid; place-items: center; gap: 20px;
+}
+.samaris-onboarding__loaderSpinner {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,.25);
+  border-top-color: var(--samaris-onboarding-blue);
+  animation: samaris-onboarding-spin 820ms linear infinite;
+}
+.samaris-onboarding__loaderText {
+  font-size: 14px; color: rgba(7,58,122,.7);
+  font-weight: 500; letter-spacing: -0.02em;
+}
+
+/* ── Screen-in-back animation (backward navigation) ── */
+@keyframes samaris-onboarding-screen-in-back {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .samaris-onboarding,
+  .samaris-onboarding__wallpaper,
+  .samaris-onboarding__mist,
+  .samaris-onboarding__screenFrame,
+  .samaris-onboarding__spinner,
+  .samaris-onboarding__orbitDot {
+    animation: none !important;
+    transition: opacity 180ms ease !important;
+  }
+}

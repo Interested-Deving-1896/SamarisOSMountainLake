@@ -1,0 +1,16 @@
+[Unit]
+Description=Samaris OS Bench — continuous monitoring service
+After=volt-kernel-b.service volt-ram-manager.service
+Documentation=file:/opt/volt/bench/README.md
+
+[Service]
+Type=simple
+ExecStart=/opt/volt/bin/bench --watch
+WorkingDirectory=/opt/volt/bench
+Environment=RUST_LOG=info
+Environment=BENCH_STORAGE_PATH=/var/lib/samaris/bench
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

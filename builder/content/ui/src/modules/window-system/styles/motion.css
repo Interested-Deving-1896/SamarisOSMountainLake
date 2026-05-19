@@ -1,0 +1,25 @@
+@media (prefers-reduced-motion: no-preference) {
+  .samaris-window,
+  .samaris-dock-item,
+  .samaris-window-control,
+  .samaris-topbar-button,
+  .samaris-window-icon-button {
+    transition:
+      transform var(--normal) var(--ease),
+      opacity var(--normal) var(--ease),
+      box-shadow var(--normal) var(--ease),
+      background var(--normal) var(--ease),
+      border-color var(--normal) var(--ease);
+  }
+
+  .samaris-window.maximized,
+  .samaris-window.snapped-left,
+  .samaris-window.snapped-right {
+    transition:
+      left var(--slow) var(--ease),
+      top var(--slow) var(--ease),
+      width var(--slow) var(--ease),
+      height var(--slow) var(--ease),
+      box-shadow var(--normal) var(--ease);
+  }
+}

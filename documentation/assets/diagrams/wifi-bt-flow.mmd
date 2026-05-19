@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant UI as AirBar / Network App
+    participant KS as connectivityStore
+    participant KC as kernelClient
+    participant KR as Kernel (device.js)
+    participant SV as connectivityService.js
+
+    Note over UI,SV: WiFi Scan
+    UI->>KS: refresh()
+    KS->>KC: request("device.connectivity.status")
+    KC->>KR: route -> handle
+    KR->>SV: getStatus()
+    SV->>SV: networksetup -getairportpower
+    SV->>SV: system_profiler SPAirPortDataType
+    SV-->>KR: {wifiEnabled, networks[], currentNetworkLabel}
+    KR-->>KC: response
+    KC-->>KS: patch state
+    KS-->>UI: re-render
+
+    Note over UI,SV: WiFi Connect
+    UI->>KS: connectNetwork(ssid, password?)
+    KS->>KC: request("device.wifi.connect", {ssid, password})
+    KC->>KR: route -> handle
+    KR->>SV: connectWifi(ssid, password)
+    SV->>SV: networksetup -setairportnetwork "Wi-Fi" ssid
+    SV-->>KR: updated status
+    KR-->>KC: response
+    KC-->>KS: patch state
+    KS-->>UI: re-render

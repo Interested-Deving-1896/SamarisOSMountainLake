@@ -1,0 +1,27 @@
+.samaris-user-menu { transform: translateY(-8px) scale(0.985); }
+.samaris-user-menu.open { transform: none; }
+
+.air-user-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid var(--air-glass-border-soft, rgba(0,0,0,0.06));
+  background: var(--panel, rgba(255,255,255,0.32));
+  color: var(--air-text-soft, #666);
+  font-size: 9px;
+  font-weight: 700;
+  font-family: inherit;
+  transition: all 120ms;
+}
+
+.air-user-action:hover {
+  background: var(--panel-strong, rgba(255,255,255,0.5));
+}
+
+.air-user-action--danger:hover {
+  color: #dc2626;
+}

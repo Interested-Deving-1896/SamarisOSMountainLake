@@ -1,0 +1,40 @@
+const ASSOCIATIONS: Record<string, string> = {
+  ".html": "peregrine",
+  ".htm": "peregrine",
+  ".txt": "textedit",
+  ".md": "notes",
+  ".pdf": "pdf-viewer",
+  ".jpg": "photos",
+  ".jpeg": "photos",
+  ".png": "photos",
+  ".gif": "photos",
+  ".webp": "photos",
+  ".mp3": "music",
+  ".wav": "music",
+  ".m4a": "music",
+  ".aac": "music",
+  ".ogg": "music",
+  ".flac": "music",
+  ".mp4": "videos",
+  ".webm": "videos",
+  ".avi": "videos",
+  ".mkv": "videos",
+  ".mov": "videos",
+  ".exe": "wine",
+  ".zip": "finder",
+  ".tar": "finder",
+  ".gz": "finder",
+  ".js": "textedit",
+  ".ts": "textedit",
+  ".json": "textedit",
+  ".css": "textedit",
+  ".xml": "textedit",
+  ".yaml": "textedit",
+  ".yml": "textedit",
+  ".sh": "textedit",
+};
+
+export function getAppForFile(filename: string): string | null {
+  const ext = filename.toLowerCase().replace(/.*(\.[a-z0-9]+)$/, "$1");
+  return ASSOCIATIONS[ext] || null;
+}

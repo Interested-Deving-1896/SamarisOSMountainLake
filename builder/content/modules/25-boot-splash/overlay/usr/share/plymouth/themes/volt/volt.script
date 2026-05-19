@@ -1,0 +1,91 @@
+# SAMARIS OS Plymouth theme (script plugin)
+
+Window.SetBackgroundTopColor(0.88, 0.89, 0.90);
+Window.SetBackgroundBottomColor(0.82, 0.83, 0.85);
+
+title.image = Image.Text("Samaris OS 1.0 Mountain Lake Alpha One", 0.20, 0.22, 0.26);
+title.sprite = Sprite(title.image);
+
+ring.count = 14;
+ring.radius = 34;
+ring.dots = Array(ring.count);
+ring.phase = 0;
+
+fun setup_spinner()
+  {
+    local i;
+    i = 0;
+    while (i < ring.count)
+      {
+        ring.dots[i].image = Image.Text("•", 0.24, 0.26, 0.30);
+        ring.dots[i].sprite = Sprite(ring.dots[i].image);
+        ring.dots[i].sprite.SetOpacity(0.06);
+        i++;
+      }
+  }
+
+setup_spinner();
+
+fun center_sprite(sprite, image, x, y, z)
+  {
+    sprite.SetPosition(x - image.GetWidth() / 2, y - image.GetHeight() / 2, z);
+  }
+
+fun refresh_callback()
+  {
+    local w, h;
+    local cx, cy;
+    local i;
+    local angle;
+    local dot_x, dot_y;
+    local lead;
+    local distance;
+    local opacity;
+
+    w = Window.GetWidth();
+    h = Window.GetHeight();
+    cx = Window.GetX() + w / 2;
+    cy = Window.GetY() + h / 2;
+
+    center_sprite(title.sprite, title.image, cx, cy - 18, 10);
+
+    ring.phase = (ring.phase + 1) % 140;
+    lead = Math.Int(ring.phase / 8) % ring.count;
+
+    i = 0;
+    while (i < ring.count)
+      {
+        angle = ((2 * 3.1415926) / ring.count) * i;
+        dot_x = cx + ring.radius * Math.Cos(angle);
+        dot_y = cy + 44 + ring.radius * Math.Sin(angle);
+
+        ring.dots[i].sprite.SetPosition(dot_x - ring.dots[i].image.GetWidth() / 2,
+                                        dot_y - ring.dots[i].image.GetHeight() / 2,
+                                        20);
+
+        distance = lead - i;
+        if (distance < 0)
+          distance = distance + ring.count;
+
+        if (distance == 0)
+          opacity = 0.92;
+        else if (distance == 1)
+          opacity = 0.62;
+        else if (distance == 2)
+          opacity = 0.34;
+        else
+          opacity = 0.09;
+
+        ring.dots[i].sprite.SetOpacity(opacity);
+        i++;
+      }
+  }
+
+Plymouth.SetRefreshFunction(refresh_callback);
+
+fun quit_callback()
+  {
+    title.sprite.SetOpacity(1);
+  }
+
+Plymouth.SetQuitFunction(quit_callback);

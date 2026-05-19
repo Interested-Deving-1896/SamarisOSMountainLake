@@ -1,0 +1,61 @@
+:root {
+  --accent-h: 212;
+  --accent-2-h: 264;
+  --bg-a: #eaf6ff;
+  --bg-b: #fff7f1;
+  --bg-c: #f8fbff;
+  --text: #152033;
+  --text-soft: rgba(21, 32, 51, 0.62);
+  --text-faint: rgba(21, 32, 51, 0.42);
+  --glass-a: rgba(255,255,255,0.66);
+  --glass-b: rgba(255,255,255,0.42);
+  --glass-c: rgba(255,255,255,0.24);
+  --glass-border: rgba(255,255,255,0.72);
+  --glass-border-soft: rgba(255,255,255,0.30);
+  --window-bg: rgba(255,255,255,0.54);
+  --window-bg-strong: rgba(255,255,255,0.70);
+  --window-border: rgba(255,255,255,0.68);
+  --window-shadow: rgba(57, 82, 128, 0.26);
+  --window-shadow-focused: rgba(48, 76, 128, 0.34);
+  --panel: rgba(255,255,255,0.32);
+  --panel-strong: rgba(255,255,255,0.46);
+  --panel-border: rgba(255,255,255,0.28);
+  --dock-bg: rgba(255,255,255,0.40);
+  --dock-border: rgba(255,255,255,0.60);
+  --radius-xl: 30px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 14px;
+  --blur-window: 32px;
+  --blur-ui: 24px;
+  --ease: cubic-bezier(.18,.84,.22,1);
+  --fast: 140ms;
+  --normal: 220ms;
+  --slow: 360ms;
+}
+
+[data-theme="dark"] {
+  --accent-h: 222;
+  --accent-2-h: 276;
+  --bg-a: #06101d;
+  --bg-b: #171120;
+  --bg-c: #0b1322;
+  --text: #eef6ff;
+  --text-soft: rgba(238, 246, 255, 0.62);
+  --text-faint: rgba(238, 246, 255, 0.38);
+  --glass-a: rgba(255,255,255,0.12);
+  --glass-b: rgba(255,255,255,0.08);
+  --glass-c: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.14);
+  --glass-border-soft: rgba(255,255,255,0.08);
+  --window-bg: rgba(10,16,29,0.66);
+  --window-bg-strong: rgba(16,24,40,0.78);
+  --window-border: rgba(255,255,255,0.12);
+  --window-shadow: rgba(0,0,0,0.48);
+  --window-shadow-focused: rgba(0,0,0,0.62);
+  --panel: rgba(255,255,255,0.06);
+  --panel-strong: rgba(255,255,255,0.10);
+  --panel-border: rgba(255,255,255,0.09);
+  --dock-bg: rgba(10,16,29,0.48);
+  --dock-border: rgba(255,255,255,0.12);
+}

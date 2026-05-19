@@ -1,0 +1,8 @@
+.enc{height:100%;padding:22px;display:grid;align-content:start;gap:14px;background:linear-gradient(180deg,rgba(255,255,255,.84),rgba(247,250,255,.76))}
+.enc__title{font-size:28px;font-weight:800;color:var(--text)}
+.enc__subtitle,.enc__note{font-size:13px;color:var(--muted)}
+.enc__card{padding:18px;border-radius:22px;border:1px solid var(--stroke);background:rgba(255,255,255,.76);display:grid;gap:14px}
+.enc__row{display:flex;justify-content:space-between;align-items:center;color:var(--text)}
+.enc__actions{display:flex;gap:10px;flex-wrap:wrap}
+.enc__btn{height:40px;padding:0 14px;border-radius:14px;border:1px solid var(--stroke);background:rgba(255,255,255,.82);color:var(--text);font-weight:700}
+html[data-theme="dark"] .enc,html[data-theme="dark"] .enc__card,html[data-theme="dark"] .enc__btn{background:rgba(17,24,39,.74);border-color:rgba(148,163,184,.12)}

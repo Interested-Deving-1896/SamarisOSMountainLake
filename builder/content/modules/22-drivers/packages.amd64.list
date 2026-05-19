@@ -1,0 +1,4 @@
+intel-microcode
+amd64-microcode
+xserver-xorg-video-intel
+thermald

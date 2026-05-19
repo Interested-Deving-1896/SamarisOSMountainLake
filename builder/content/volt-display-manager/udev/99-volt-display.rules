@@ -1,0 +1,34 @@
+# VOLT Display Manager — udev rules for display hotplug
+#
+# These rules trigger awareness of display changes through DRM events.
+#
+# IMPORTANT:
+#   Do NOT run xrandr directly from udev. Udev events fire in an
+#   environment without DISPLAY, XAUTHORITY, or user session context.
+#
+#   Instead, these rules notify the volt-display-hotplug systemd user
+#   service, which runs inside the graphical session and has full
+#   X11 access.
+#
+# Strategy:
+#   Tag the event for systemd user instance awareness.
+#   The hotplug watcher polls xrandr independently; these rules
+#   serve as supplementary triggers for faster reaction.
+
+ACTION=="change", SUBSYSTEM=="drm", KERNEL=="card*", \
+  TAG+="systemd", \
+  ENV{SYSTEMD_USER_WANTS}="volt-display-hotplug.service"
+
+# Also react to hotplug of specific connectors (HDMI/DP)
+ACTION=="change", SUBSYSTEM=="drm", KERNEL=="card*-HDMI-*", \
+  TAG+="systemd"
+
+ACTION=="change", SUBSYSTEM=="drm", KERNEL=="card*-DP-*", \
+  TAG+="systemd"
+
+# Known limitations:
+#   - udev may fire before the connector state is fully settled.
+#     The VDM debouncer (500ms) mitigates this.
+#   - Some GPU drivers do not emit connector-level udev events.
+#     In that case, the hotplug service's 2-second poll loop
+#     serves as the reliable fallback.

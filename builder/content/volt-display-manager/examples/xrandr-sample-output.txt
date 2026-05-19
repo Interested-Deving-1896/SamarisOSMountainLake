@@ -1,0 +1,16 @@
+Screen 0: minimum 8 x 8, current 3840 x 2160, maximum 32767 x 32767
+HDMI-1 connected primary 3840x2160+0+0 (normal left inverted right x axis y axis) 527mm x 296mm
+   3840x2160     60.00*+  30.00    29.97    25.00    23.98
+   2560x1440     59.95
+   1920x1080     60.00    59.94    50.00    29.97    25.00    23.98
+   1680x1050     59.88
+   1280x1024     75.02    60.02
+   1280x720      60.00    59.94
+   1024x768      75.03    70.07    60.00
+DP-1 connected 1920x1200+3840+0 (normal left inverted right x axis y axis) 518mm x 324mm
+   1920x1200     59.95*+
+   1920x1080     60.00    59.94
+   1600x1200     60.00
+   1280x1024     75.02    60.02
+   1280x720      60.00    59.94
+HDMI-2 disconnected (normal left inverted right x axis y axis)

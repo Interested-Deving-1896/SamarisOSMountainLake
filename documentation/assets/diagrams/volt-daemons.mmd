@@ -1,0 +1,19 @@
+graph LR
+    subgraph Unifier["Volt Unifier (Node.js)"]
+        Bridges["Bridges (Orbit, Desktop, Finder…)"]
+        Health["Health Monitor"]
+    end
+    subgraph SBP["SBP Protocol — Unix Sockets"]
+    end
+    subgraph Daemons["Rust Daemons"]
+        KB["Kernel B<br/>JSON-RPC<br/>:9998"]
+        VRM["VRM<br/>SBP-MEM<br/>Quotas + Pressure"]
+        DWP["DWP<br/>SBP-V5<br/>Scheduler + Burst"]
+        VGM["VGM<br/>SBP-GPU<br/>VRAM + Thermal"]
+        VUM["VUM<br/>SBP-USB<br/>Cache + Journal"]
+    end
+    Unifier --> SBP
+    SBP --> Daemons
+    Bridges --> KB
+    Bridges --> VRM
+    Bridges --> DWP

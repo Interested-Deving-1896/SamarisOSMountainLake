@@ -1,0 +1,34 @@
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                       ║
+║                          LOGS DE CONSTRUCTION                                         ║
+║                    Etape : 05-packages  |  x86_64                                     ║
+║                                                                                       ║
+╠══════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                       ║
+║  ┌──────────────────────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [14:36:01] [samaris] Installing 247 packages for x86_64 (amd64)                |  ║
+║  |  [14:36:02] [samaris] Downloading debootstrap packages from cache                |  ║
+║  |  [14:36:04] [samaris] 128/247 packages cached, downloading 119                   |  ║
+║  |  [14:36:07] [samaris] Downloading: libc6_2.40-3_amd64.deb                      |  ║
+║  |  [14:36:08] [samaris] Downloading: libstdc++6_14-2024_amd64.deb                |  ║
+║  |  [14:36:10] [samaris] progress: 52% -- 2.3 MB/s, ETA 2m14s                      |  ║
+║  |  [14:36:12] [samaris] Downloading: nodejs_20.15.0_amd64.deb                     |  ║
+║  |  [14:36:15] [samaris] progress: 77% -- 2.1 MB/s, ETA 0m58s                      |  ║
+║  |  [14:36:18] [samaris] Installing: libc6... (extracting)                           |  ║
+║  |  [14:36:20] [samaris] Installing: libstdc++6... (extracting)                      |  ║
+║  |  [14:36:25] [samaris] progress: 100% -- all packages downloaded                  |  ║
+║  |  [14:36:30] [samaris] Configuring packages...                                    |  ║
+║  |  [14:36:35] [samaris] Warning: service NetworkManager-wait-online.service        |  ║
+║  |  [14:36:40] [samaris] 247/247 packages installed successfully                    |  ║
+║  |  [14:36:42] [samaris] Creating live user 'user'                                   |  ║
+║  |  [14:36:43] [samaris] Setting up passwordless sudo                                |  ║
+║  |  [14:36:45] [samaris] Step 05-packages completed (8m15s)                         |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌──────────────────────────────────────────────────────────────────────────────────┐  ║
+║  |  [Fleches haut/bas] Scroll  [F] Chercher  [C] Copier  [Q] Fermer               |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝

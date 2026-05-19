@@ -1,0 +1,467 @@
+.samaris-login {
+  position: fixed;
+  inset: 0;
+  z-index: 200000;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  color: rgba(255, 255, 255, 0.94);
+  font-family:
+    "SF Pro Text",
+    "Segoe UI Variable Text",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+.samaris-login__wallpaper,
+.samaris-login__diffusion,
+.samaris-login__glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.samaris-login__wallpaper {
+  background-color: #8abcf3;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.018);
+  transition: opacity 520ms cubic-bezier(.18,.84,.22,1);
+  will-change: transform, opacity;
+}
+
+.samaris-login__wallpaper--loaded {
+  opacity: 1;
+}
+
+.samaris-login__wallpaper--veil {
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255,255,255,0.18), transparent 24%),
+    linear-gradient(180deg, rgba(229, 239, 252, 0.38), rgba(218, 230, 248, 0.24));
+  backdrop-filter: blur(20px) saturate(1.08);
+  -webkit-backdrop-filter: blur(20px) saturate(1.08);
+  opacity: 1;
+}
+
+.samaris-login--login .samaris-login__wallpaper {
+  animation: samaris-login-breathe 24000ms ease-in-out infinite alternate;
+}
+
+.samaris-login__diffusion {
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255,255,255,0.2), transparent 20%),
+    radial-gradient(circle at 50% 56%, rgba(255,255,255,0.09), transparent 34%),
+    linear-gradient(180deg, rgba(10,50,110,0.18) 0%, rgba(26,100,180,0.1) 42%, rgba(7,42,96,0.2) 100%);
+}
+
+.samaris-login__glow {
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,0.1), transparent 22%),
+    radial-gradient(circle at 76% 76%, rgba(197,223,255,0.12), transparent 24%);
+  opacity: 0.8;
+  animation: samaris-login-drift 30000ms ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.samaris-login__shell {
+  position: relative;
+  z-index: 2;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  place-items: center;
+  padding: 54px 48px 76px;
+}
+
+.samaris-login__core {
+  width: min(620px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(-16px);
+  transition:
+    opacity 260ms cubic-bezier(.18,.84,.22,1),
+    transform 260ms cubic-bezier(.18,.84,.22,1),
+    filter 260ms cubic-bezier(.18,.84,.22,1);
+}
+
+.samaris-login__clock {
+  text-align: center;
+  margin-bottom: 56px;
+  text-shadow:
+    0 2px 18px rgba(255,255,255,0.22),
+    0 12px 40px rgba(0,38,90,0.14);
+}
+
+.samaris-login__time {
+  font-family:
+    "SF Pro Display",
+    "Segoe UI Variable Display",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: clamp(72px, 8vw, 124px);
+  line-height: 0.86;
+  font-weight: 250;
+  letter-spacing: -0.075em;
+  color: rgba(255,255,255,0.9);
+}
+
+.samaris-login__date {
+  margin-top: 22px;
+  font-size: clamp(18px, 1.6vw, 26px);
+  font-weight: 360;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.7);
+}
+
+.samaris-login__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(470px, 100%);
+}
+
+.samaris-login__avatarWrap {
+  position: relative;
+  width: 154px;
+  height: 154px;
+  margin-bottom: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 34% 18%, rgba(255,255,255,0.82), transparent 34%),
+    rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.46);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.52),
+    0 0 0 7px rgba(255,255,255,0.12),
+    0 22px 62px rgba(0,45,110,0.2);
+}
+
+.samaris-login__avatarWrap--lock {
+  width: 138px;
+  height: 138px;
+}
+
+.samaris-login__avatarCore {
+  width: calc(100% - 14px);
+  height: calc(100% - 14px);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.58), transparent 28%),
+    linear-gradient(180deg, rgba(219,236,255,0.92), rgba(123,185,244,0.76));
+  color: rgba(255,255,255,0.96);
+  border: 1px solid rgba(255,255,255,0.42);
+}
+
+.samaris-login__avatarInitials {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  text-shadow: 0 10px 30px rgba(0,58,130,0.18);
+}
+
+.samaris-login__name {
+  font-family:
+    "SF Pro Display",
+    "Segoe UI Variable Display",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  color: rgba(255,255,255,0.94);
+  font-size: clamp(25px, 2vw, 34px);
+  font-weight: 420;
+  letter-spacing: -0.045em;
+}
+
+.samaris-login__subtitle {
+  margin-top: 10px;
+  font-size: 15px;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: -0.015em;
+}
+
+.samaris-login__passwordZone {
+  width: 100%;
+  margin-top: 26px;
+  display: grid;
+  justify-items: center;
+}
+
+.samaris-login__line {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.34) 12%, rgba(255,255,255,0.48) 50%, rgba(255,255,255,0.34) 88%, transparent);
+}
+
+.samaris-login__passwordLabel {
+  position: relative;
+  width: 100%;
+  min-height: 70px;
+  display: grid;
+  place-items: center;
+  cursor: text;
+}
+
+.samaris-login__passwordDisplay {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.samaris-login__passwordDot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  opacity: 0.98;
+  animation: samaris-login-dot-in 260ms cubic-bezier(.18,.84,.22,1) both;
+}
+
+.samaris-login__passwordInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: auto;
+  border: 0;
+}
+
+.samaris-login__submit {
+  width: 76px;
+  height: 56px;
+  margin-top: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.94);
+  cursor: pointer;
+  transition:
+    transform 180ms cubic-bezier(.18,.84,.22,1),
+    background 180ms cubic-bezier(.18,.84,.22,1),
+    opacity 180ms cubic-bezier(.18,.84,.22,1);
+}
+
+.samaris-login__submit:hover {
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.samaris-login__submit:active {
+  transform: translateY(0) scale(.98);
+}
+
+.samaris-login__submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.samaris-login__helper,
+.samaris-login__error {
+  margin-top: 16px;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+}
+
+.samaris-login__helper {
+  color: rgba(255,255,255,0.82);
+}
+
+.samaris-login__error {
+  color: rgba(255,232,232,0.92);
+}
+
+.samaris-login__footer {
+  position: fixed;
+  left: 50%;
+  bottom: 58px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.samaris-login__status {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  color: rgba(255,255,255,0.84);
+  font-size: clamp(15px, 1.15vw, 19px);
+  font-weight: 430;
+  letter-spacing: -0.02em;
+}
+
+.samaris-login__statusItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.samaris-login__statusDot,
+.samaris-login__statusDivider {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.62);
+}
+
+.samaris-login__statusDivider {
+  opacity: 0.7;
+}
+
+.samaris-login__power {
+  position: fixed;
+  right: 34px;
+  bottom: 34px;
+  z-index: 4;
+  display: flex;
+  gap: 12px;
+  opacity: 0.76;
+}
+
+.samaris-login__powerBtn {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.84);
+  cursor: pointer;
+  backdrop-filter: blur(18px) saturate(1.12);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+  transition:
+    transform 180ms cubic-bezier(.18,.84,.22,1),
+    background 180ms cubic-bezier(.18,.84,.22,1),
+    opacity 180ms cubic-bezier(.18,.84,.22,1);
+}
+
+.samaris-login__powerBtn:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-1px);
+}
+
+.samaris-login.is-unlocking .samaris-login__core {
+  animation: samaris-login-unlock 860ms cubic-bezier(.18,.84,.22,1) forwards;
+}
+
+.samaris-login.is-unlocking .samaris-login__footer,
+.samaris-login.is-unlocking .samaris-login__power {
+  animation: samaris-login-footer-fade 520ms cubic-bezier(.18,.84,.22,1) forwards;
+}
+
+@keyframes samaris-login-dot-in {
+  from { opacity: 0; transform: scale(.65); }
+  to { opacity: .98; transform: scale(1); }
+}
+
+@keyframes samaris-login-unlock {
+  0% { opacity: 1; transform: translateY(-16px) scale(1); filter: blur(0); }
+  55% { opacity: .86; transform: translateY(-20px) scale(.985); filter: blur(2px); }
+  100% { opacity: 0; transform: translateY(-34px) scale(.965); filter: blur(14px); }
+}
+
+@keyframes samaris-login-footer-fade {
+  to { opacity: 0; transform: translateX(-50%) translateY(10px); }
+}
+
+@keyframes samaris-login-breathe {
+  from { transform: scale(1.015) translate3d(0,0,0); }
+  to { transform: scale(1.03) translate3d(-0.6%, -0.4%, 0); }
+}
+
+@keyframes samaris-login-drift {
+  from { transform: translate3d(0,0,0); opacity: .74; }
+  to { transform: translate3d(0.8%, -0.8%, 0); opacity: .9; }
+}
+
+@media (max-width: 760px) {
+  .samaris-login__shell {
+    padding: 42px 24px 72px;
+  }
+
+  .samaris-login__clock {
+    margin-bottom: 40px;
+  }
+
+  .samaris-login__avatarWrap {
+    width: 128px;
+    height: 128px;
+  }
+
+  .samaris-login__avatarCore {
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+  }
+
+  .samaris-login__avatarInitials {
+    font-size: 36px;
+  }
+
+  .samaris-login__footer {
+    bottom: 42px;
+  }
+
+  .samaris-login__status {
+    gap: 14px;
+    font-size: 13px;
+  }
+
+  .samaris-login__power {
+    display: none;
+  }
+}
+
+/* ── Multi-user: user list ── */
+.samaris-login__userList {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 16px;
+}
+.samaris-login__userBtn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px; border-radius: 18px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  color: white; cursor: pointer; text-align: left; width: 100%;
+}
+.samaris-login__userBtn:hover { background: rgba(255,255,255,0.15); }
+.samaris-login__userName { font-size: 15px; font-weight: 700; }
+.samaris-login__userSub { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+.samaris-login__switchUser {
+  margin-top: 12px; border: 0; background: transparent;
+  color: rgba(255,255,255,0.6); font-size: 12px; cursor: pointer;
+  padding: 6px 12px; border-radius: 8px;
+}
+.samaris-login__switchUser:hover { background: rgba(255,255,255,0.1); color: white; }
+
+@media (prefers-reduced-motion: reduce) {
+  .samaris-login *,
+  .samaris-login *::before,
+  .samaris-login *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

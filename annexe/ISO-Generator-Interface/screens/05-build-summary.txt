@@ -1,0 +1,65 @@
+╔══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                       ║
+║                              BUILD TERMINE                                            ║
+║                                                                                       ║
+╠══════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                       ║
+║  ╔═══════════════════════════╗  ╔═══════════════════════════╗                          ║
+║  ║  29/29  SUCCES            ║  ║  3 avertissements         ║                          ║
+║  ║  Duree : 00:34:12         ║  ║  0 erreurs                ║                          ║
+║  ║  ISO   : 10.6 GB          ║  ║  8 cache hits             ║                          ║
+║  ╚═══════════════════════════╝  ╚═══════════════════════════╝                          ║
+║                                                                                       ║
+║  ┌─ RESULTATS PAR ETAPE ─────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  Etape                    Statut    Valide   Duree    Cache    Taille            |  ║
+║  |  ----------------------------------------------------------------------          |  ║
+║  |  00-check-env             [OK] ok   [V]      0:02     HIT      --                |  ║
+║  |  01-clean                 [OK] ok   [V]      0:01     HIT      --                |  ║
+║  |  02-ai-assets             [OK] ok   [V]      1:15     HIT      2.8 GB            |  ║
+║  |  03-rust-kernel           [OK] ok   [V]      3:22     HIT      30 MB             |  ║
+║  |  03.5-ram-manager         [OK] ok   [V]      0:45     HIT      10 MB             |  ║
+║  |  03.6-usb-manager         [OK] ok   [V]      0:38     HIT      10 MB             |  ║
+║  |  03.7-gpu-manager         [OK] ok   [V]      0:41     HIT      10 MB             |  ║
+║  |  03.8-worker-pool         [OK] ok   [V]      0:33     HIT      10 MB             |  ║
+║  |  03.9-adaptive-config     [OK] ok   [V]      0:29     HIT      10 MB             |  ║
+║  |  03.10-display-manager    [OK] ok   [V]      2:12     HIT      15 MB             |  ║
+║  |  03.11-bench              [--] skip  --       --       --       --                |  ║
+║  |  04-rootfs-bootstrap      [OK] ok   [V]      5:30     HIT      500 MB            |  ║
+║  |  05-packages              [OK] ok   [V]      8:15     MISS     --                |  ║
+║  |  06-modules               [OK] ok   [V]      0:30     MISS     --                |  ║
+║  |  07-boot-theme            [OK] ok   [V]      0:15     HIT      --                |  ║
+║  |  08-overlay               [OK] ok   [V]      0:20     MISS     --                |  ║
+║  |  09-ui                    [OK] ok   [V]      1:45     MISS     5 MB              |  ║
+║  |  10-kernel-a              [OK] ok   [V]      0:30     HIT      --                |  ║
+║  |  11-electron              [OK] ok   [V]      3:15     HIT      350 MB            |  ║
+║  |  12-squashfs              [OK] ok   [V]      1:20     MISS     10.6 GB           |  ║
+║  |  13-iso-tree              [OK] ok   [V]      0:45     MISS     --                |  ║
+║  |  14-iso-image             [OK] ok   [V]      2:30     MISS     10.6 GB           |  ║
+║  |  15-checksums             [OK] ok   [V]      0:10     --       --                |  ║
+║  |  16-validate              [OK] ok   [V]      0:05     --       --                |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ FICHIERS GENERES ────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  output/Samaris-OS-Alpha-One-RC.iso                     10.6 GB                  |  ║
+║  |  output/Samaris-OS-Alpha-One-RC.iso.sha256              --                        |  ║
+║  |  output/checkpoints/logs/                               12.4 MB                   |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌─ AVERTISSEMENTS ──────────────────────────────────────────────────────────────────┐  ║
+║  |                                                                                  |  ║
+║  |  [!] Qwen3-1.7B-Q8_0.gguf not found — Orbit LLM sera indisponible               |  ║
+║  |  [!] Wayland compositor non teste sur aarch64                                    |  ║
+║  |  [!] Module 99-demo : fichier config.toml manquant                               |  ║
+║  |                                                                                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+║  ┌──────────────────────────────────────────────────────────────────────────────────┐  ║
+║  |  [1] DEMARRER DANS QEMU    [2] VOIR LE RAPPORT    [3] SAUVER LA CONFIG          |  ║
+║  |  [4] RETOUR AU MENU        [5] NETTOYER            [q] QUITTER                  |  ║
+║  └──────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                       ║
+╚══════════════════════════════════════════════════════════════════════════════════════╝

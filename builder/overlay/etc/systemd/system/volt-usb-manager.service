@@ -1,0 +1,19 @@
+[Unit]
+Description=Volt USB Manager — Journaled Storage Manager
+Documentation=https://samaris.tech/docs/usb-manager
+After=volt-kernel-b.service
+Before=volt-kernel.service
+Wants=volt-kernel-b.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/start-usb-manager.sh
+Restart=on-failure
+RestartSec=1
+Nice=-10
+LimitNOFILE=65536
+Environment=RUST_LOG=info
+WorkingDirectory=/opt/volt/usb-manager
+
+[Install]
+WantedBy=multi-user.target

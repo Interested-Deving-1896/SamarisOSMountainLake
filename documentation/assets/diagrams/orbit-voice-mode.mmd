@@ -1,0 +1,13 @@
+flowchart TD
+    START(["Voice Mode ON"]) --> LISTEN["🎤 Listening (VAD)"]
+    LISTEN -->|"Speech detected"| RECORD["Recording audio"]
+    RECORD -->|"Silence detected"| STT["STT: Whisper<br/>→ text"]
+    STT -->|"stop / arrête"| STOP(["Voice Mode OFF"])
+    STT -->|"text"| LLM["LLM: Qwen3 1.7B<br/>→ response"]
+    LLM -->|"response text"| ADD["Add to chat"]
+    LLM --> TTS["TTS: OuteTTS 0.2<br/>→ audio WAV"]
+    TTS --> PLAY["🔊 Play via Audio element"]
+    PLAY -->|"playback ends"| LISTEN
+    PLAY -->|"user speaks over"| INTERRUPT{"User speaks?"}
+    INTERRUPT -->|"yes"| LISTEN
+    INTERRUPT -->|"no"| PLAY

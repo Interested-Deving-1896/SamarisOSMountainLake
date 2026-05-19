@@ -1,0 +1,61 @@
+# Build artifacts
+work/
+output/
+cache/
+dist/
+
+# Downloaded AI model binaries (download by scripts/build scripts)
+builder/overlay/opt/volt/ai-models/
+
+# Pre-built game binaries (download by installer)
+**/games/doom/
+**/vendor/js-dos/
+
+# Demo media files (not source code)
+**/Demo/*.mp4
+**/Demo/*.pdf
+annexe/Demo/
+
+# Pre-compiled Rust binaries (built from source in builder/content/)
+builder/overlay/opt/volt/bin/*-x86_64
+builder/overlay/opt/volt/bin/*-aarch64
+builder/overlay/opt/volt/bin/bench
+builder/overlay/opt/volt/bin/kernel-b-*
+builder/overlay/opt/volt/bin/tesseract-engine-*
+
+# Zipped archives
+annexe/*.zip
+
+# Dependencies
+node_modules/
+target/
+.venv/
+__pycache__/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Runtime data
+.volt/
+
+# TypeScript
+*.tsbuildinfo
+
+# Rust
+*.o
+*.d
+*.pdb

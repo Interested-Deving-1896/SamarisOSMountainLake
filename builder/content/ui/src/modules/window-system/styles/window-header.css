@@ -1,0 +1,105 @@
+.samaris-window-header {
+  position: relative;
+  z-index: 8;
+  height: 58px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 0 16px;
+  cursor: grab;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  user-select: none;
+}
+
+.samaris-window-header:active {
+  cursor: grabbing;
+}
+
+.samaris-window.dragging .samaris-window-header {
+  cursor: grabbing;
+}
+
+.samaris-window-header.not-draggable {
+  cursor: default;
+}
+
+.samaris-window-controls {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+
+.samaris-window-control {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.68),
+    0 3px 9px rgba(0,0,0,0.18);
+}
+
+.samaris-window-control:hover {
+  transform: scale(1.1);
+}
+
+.samaris-window-control.close {
+  background: #ff5f57;
+}
+
+.samaris-window-control.minimize {
+  background: #ffbd2e;
+}
+
+.samaris-window-control.maximize {
+  background: #28c840;
+}
+
+.samaris-window-title-block {
+  min-width: 0;
+}
+
+.samaris-window-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13.5px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.samaris-window-subtitle {
+  margin-top: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text-soft);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.samaris-window-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.samaris-window-icon-button {
+  width: 31px;
+  height: 31px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  color: var(--text);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-weight: 900;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.samaris-window-icon-button:hover {
+  background: var(--panel-strong);
+}

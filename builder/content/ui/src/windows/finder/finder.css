@@ -1,0 +1,190 @@
+/* ── Finder — Glass-morphic File Browser ── */
+.finder {
+  height: 100%; display: flex; flex-direction: column;
+  background: linear-gradient(180deg, rgba(248,251,255,0.98), rgba(239,244,250,0.98));
+}
+
+/* ── Toolbar ── */
+.finder-toolbar {
+  height: 48px; display: flex; align-items: center; gap: 12px; padding: 0 12px;
+  border-bottom: 1px solid rgba(44,72,112,0.06);
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(245,249,255,0.88));
+  backdrop-filter: blur(22px) saturate(1.08);
+  -webkit-backdrop-filter: blur(22px) saturate(1.08);
+}
+.finder-toolbar__nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.finder-toolbar__btn {
+  width: 34px; height: 34px; border: 1px solid rgba(44,72,112,0.08); border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(241,246,252,0.92));
+  color: #455468; display: grid; place-items: center; cursor: pointer;
+  transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+  box-shadow: 0 4px 12px rgba(40,65,106,0.05);
+}
+.finder-toolbar__btn:hover { transform: translateY(-1px); border-color: rgba(45,108,255,0.18); box-shadow: 0 6px 16px rgba(40,65,106,0.1); }
+.finder-toolbar__btn:disabled { opacity: 0.35; transform: none; box-shadow: none; cursor: default; }
+.finder-toolbar__btn--danger:hover { color: #dc2626; border-color: rgba(220,38,38,0.2); }
+
+.finder-toolbar__breadcrumbs { flex: 1; min-width: 0; display: flex; align-items: center; gap: 4px; overflow: auto; white-space: nowrap; scrollbar-width: none; }
+.finder-toolbar__breadcrumbs::-webkit-scrollbar { display: none; }
+.finder-toolbar__crumb {
+  height: 30px; padding: 0 10px; border: 1px solid rgba(44,72,112,0.06); border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(242,247,252,0.8));
+  color: #324256; font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: background 150ms ease, transform 150ms ease;
+}
+.finder-toolbar__crumb:hover { background: rgba(45,108,255,0.08); transform: translateY(-1px); }
+.finder-toolbar__sep { color: #95a3b6; font-size: 14px; font-weight: 700; flex-shrink: 0; }
+
+.finder-toolbar__tools { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.finder-toolbar__search { height: 34px; min-width: 140px; padding: 0 10px; border-radius: 10px; border: 1px solid rgba(44,72,112,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(242,247,252,0.86));
+  display: flex; align-items: center; gap: 6px; color: #7a8ea6; font-size: 12px;
+  box-shadow: 0 4px 12px rgba(40,65,106,0.04);
+}
+.finder-toolbar__search input { min-width: 100px; border: 0; outline: none; background: transparent; color: #455468; font-size: 12px; }
+.finder-toolbar__search input::placeholder { color: #7a8ea6; }
+
+.finder-toolbar__views { display: flex; gap: 2px; padding: 3px; border-radius: 10px; border: 1px solid rgba(44,72,112,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(242,247,252,0.86));
+}
+.finder-toolbar__viewBtn { width: 32px; height: 28px; border: 0; border-radius: 7px; background: transparent; color: #6b7c90; display: grid; place-items: center; cursor: pointer; transition: background 150ms ease, color 150ms ease; }
+.finder-toolbar__viewBtn:hover { color: #324256; }
+.finder-toolbar__viewBtn--active { background: rgba(45,108,255,0.12); color: #2563eb; }
+
+.finder-toolbar__count { font-size: 11px; font-weight: 700; color: #64748b; white-space: nowrap; }
+
+/* ── Body ── */
+.finder-body { flex: 1; min-height: 0; display: grid; grid-template-columns: 224px minmax(0, 1fr); }
+
+/* ── Sidebar ── */
+.finder-sidebar { border-right: 1px solid rgba(44,72,112,0.06); padding: 14px 10px; background: linear-gradient(180deg, rgba(248,251,255,0.98), rgba(239,244,250,0.98)); overflow: auto; }
+.finder-sidebar__section + .finder-sidebar__section { margin-top: 18px; }
+.finder-sidebar__heading { margin: 0 10px 8px; color: #7a8a9c; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.finder-sidebar__items { display: grid; gap: 2px; }
+.finder-sidebar__item {
+  width: 100%; min-height: 34px; padding: 0 10px; border: 1px solid transparent; border-radius: 10px;
+  background: transparent; color: #334155; display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 8px;
+  cursor: pointer; transition: background 140ms ease, border-color 140ms ease, transform 140ms ease, color 140ms ease;
+  font-size: 13px; font-weight: 550;
+}
+.finder-sidebar__item:hover { background: rgba(255,255,255,0.72); border-color: rgba(44,72,112,0.06); transform: translateX(2px); }
+.finder-sidebar__item--active { color: #2563eb; background: linear-gradient(180deg, rgba(96,141,255,0.16), rgba(45,108,255,0.06)); border-color: rgba(45,108,255,0.12); box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 6px 16px rgba(47,109,246,0.06); }
+.finder-sidebar__item:disabled { opacity: 0.45; cursor: default; }
+.finder-sidebar__icon { display: grid; place-items: center; width: 22px; height: 22px; }
+.finder-sidebar__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.finder-sidebar__hint { color: #8fa0b2; font-size: 10px; white-space: nowrap; }
+.finder-sidebar__action { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 999px; border: 0; background: transparent; color: #7a8ea6; cursor: pointer; transition: background 140ms ease, color 140ms ease; }
+.finder-sidebar__action:hover { background: rgba(255,255,255,0.72); color: #324256; }
+
+/* ── Main Content ── */
+.finder-main { min-width: 0; display: flex; flex-direction: column; background: rgba(255,255,255,0.42); }
+.finder-main__head { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid rgba(44,72,112,0.04); }
+.finder-main__head--search { gap: 16px; }
+.finder-main__col { flex: 1; border: 0; background: none; color: #8190a3; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-align: left; padding: 0; }
+.finder-main__col--sortable { cursor: pointer; }
+.finder-main__col--sortable:hover { color: #455468; }
+.finder-main__col--active { color: #2563eb; }
+.finder-main__empty { padding: 32px 20px; color: #6c7d90; font-size: 13px; text-align: center; }
+.finder-main__empty--error { color: #b91c1c; }
+.finder-main__list { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; }
+.finder-main__list::-webkit-scrollbar { width: 8px; }
+.finder-main__list::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.38); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
+.finder-main__list--grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; padding: 16px; align-content: start; }
+
+/* ── List Rows ── */
+.finder-row { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 16px; border: 0; background: transparent; color: #1f2b39; border-bottom: 1px solid rgba(44,72,112,0.025); text-align: left; cursor: pointer; transition: background 150ms ease, box-shadow 150ms ease; contain: content; content-visibility: auto; }
+.finder-row:hover { background: rgba(65,118,255,0.04); }
+.finder-row--selected { background: linear-gradient(180deg, rgba(92,137,255,0.14), rgba(45,108,255,0.08)); box-shadow: inset 3px 0 0 #2563eb; }
+.finder-row[data-drop-target="true"] { background: rgba(45,108,255,0.08); box-shadow: inset 0 0 0 1px rgba(45,108,255,0.18); }
+.finder-row--selected[data-drop-target="true"] { background: linear-gradient(180deg, rgba(92,137,255,0.22), rgba(45,108,255,0.16)); box-shadow: inset 3px 0 0 #2563eb, inset 0 0 0 1px rgba(45,108,255,0.18); }
+.finder-row--search { gap: 16px; }
+
+.finder-row__name { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+.finder-row__icon { flex-shrink: 0; filter: drop-shadow(0 4px 8px rgba(40,65,106,0.08)); }
+.finder-row__nameText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 550; }
+.finder-row__col { font-size: 12px; color: #738397; display: flex; align-items: center; flex-shrink: 0; }
+.finder-row__path { flex: 1.3; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #64748b; font-size: 12px; }
+.finder-row__meta { width: 120px; text-align: right; color: #64748b; font-size: 12px; flex-shrink: 0; }
+.finder-row__kindBadge { display: inline-flex; align-items: center; justify-content: center; min-width: 48px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #7a8ea6; }
+
+.finder-row__renameInput { flex: 1; min-width: 0; border: 1px solid rgba(45,108,255,0.3); border-radius: 6px; padding: 2px 8px; font-size: 13px; font-weight: 550; outline: none; background: rgba(255,255,255,0.8); color: #1f2b39; }
+
+/* ── Grid Rows ── */
+.finder-row--grid { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 8px; padding: 16px 12px; border-radius: 16px; border: 1px solid rgba(44,72,112,0.04); background: rgba(255,255,255,0.52); border-bottom: 1px solid rgba(44,72,112,0.04); }
+.finder-row--grid:hover { background: rgba(65,118,255,0.06); transform: translateY(-2px); }
+.finder-row--grid.finder-row--selected { background: linear-gradient(180deg, rgba(92,137,255,0.16), rgba(45,108,255,0.1)); box-shadow: 0 0 0 1px rgba(45,108,255,0.14), 0 4px 12px rgba(45,108,255,0.08); }
+.finder-row--grid .finder-row__icon { margin-bottom: 2px; }
+.finder-row--grid .finder-row__nameText { white-space: normal; overflow: visible; text-overflow: unset; line-height: 1.3; text-align: center; font-size: 13px; }
+.finder-row--grid .finder-row__renameInput { max-width: 120px; text-align: center; }
+.finder-row__gridMeta { font-size: 11px; color: #738397; }
+
+/* ── Column View ── */
+.finder-columns { flex: 1; min-height: 0; display: flex; overflow: auto; gap: 1px; background: rgba(44,72,112,0.04); }
+.finder-columns__col { min-width: 220px; max-width: 280px; overflow: auto; padding: 8px; background: rgba(255,255,255,0.56); border-right: 1px solid rgba(44,72,112,0.06); }
+.finder-columns__path { padding: 6px 10px; font-size: 10px; font-weight: 700; color: #95a3b6; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+.finder-columns__item { width: 100%; display: flex; align-items: center; gap: 8px; padding: 6px 10px; border: 0; border-radius: 8px; background: transparent; color: #334155; font-size: 13px; cursor: pointer; transition: background 120ms ease; }
+.finder-columns__item:hover { background: rgba(65,118,255,0.06); }
+.finder-columns__item--selected { background: rgba(45,108,255,0.12); color: #2563eb; }
+
+/* ── Inspector ── */
+.finder-body:has(.finder-inspector) { grid-template-columns: 224px minmax(0, 1fr) 280px; }
+.finder-inspector { border-left: 1px solid rgba(44,72,112,0.06); padding: 16px; background: linear-gradient(180deg, rgba(249,251,254,0.98), rgba(243,247,252,0.98)); display: flex; flex-direction: column; min-width: 0; overflow: auto; }
+.finder-inspector__header { display: flex; align-items: center; gap: 8px; color: #748496; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 16px; }
+.finder-inspector__empty { color: #95a3b6; font-size: 12px; text-align: center; padding: 20px 0; }
+.finder-inspector__body { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.finder-inspector__icon { margin-bottom: 4px; }
+.finder-inspector__name { font-size: 15px; font-weight: 700; color: #122033; text-align: center; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.finder-inspector__kind { font-size: 12px; color: #7b8b9d; }
+.finder-inspector__thumb { margin: 8px 0; border-radius: 12px; overflow: hidden; border: 1px solid rgba(44,72,112,0.08); }
+.finder-inspector__thumb img { display: block; max-width: 100%; height: auto; }
+.finder-inspector__meta { width: 100%; display: grid; gap: 6px; margin: 8px 0; }
+.finder-inspector__metaRow { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; }
+.finder-inspector__metaRow span:first-child { color: #7b8b9d; font-weight: 600; }
+.finder-inspector__metaRow span:last-child { color: #334256; text-align: right; }
+.finder-inspector__metaPath { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 160px; }
+.finder-inspector__actions { width: 100%; display: grid; gap: 4px; margin: 8px 0; }
+.finder-inspector__actions button { width: 100%; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid rgba(44,72,112,0.08); border-radius: 8px; background: rgba(255,255,255,0.8); color: #334256; font-size: 12px; cursor: pointer; transition: background 140ms ease; }
+.finder-inspector__actions button:hover { background: rgba(255,255,255,0.96); border-color: rgba(44,72,112,0.14); }
+.finder-inspector__action--danger:hover { color: #dc2626; border-color: rgba(220,38,38,0.2); background: rgba(220,38,38,0.04); }
+.finder-inspector__preview { width: 100%; max-height: 160px; overflow: auto; padding: 10px; border-radius: 10px; border: 1px solid rgba(44,72,112,0.06); background: rgba(255,255,255,0.84); font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; color: #455468; line-height: 1.6; white-space: pre-wrap; }
+
+/* ── Status Bar ── */
+.finder-statusbar { height: 24px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; border-top: 1px solid rgba(44,72,112,0.04); font-size: 11px; font-weight: 600; color: #95a3b6; flex-shrink: 0; }
+
+/* ── Toast ── */
+.finder-toast { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); padding: 8px 16px; border-radius: 10px; background: rgba(30,41,59,0.92); color: #e5edf7; font-size: 12px; font-weight: 600; z-index: 1000; pointer-events: none; backdrop-filter: blur(12px); }
+
+/* ── Dark Mode ── */
+html[data-theme="dark"] .finder { background: linear-gradient(180deg, rgba(17,24,39,0.98), rgba(15,23,42,0.98)); }
+html[data-theme="dark"] .finder-toolbar,
+html[data-theme="dark"] .finder-sidebar,
+html[data-theme="dark"] .finder-inspector { background: rgba(17,24,39,0.82); border-color: rgba(148,163,184,0.1); }
+html[data-theme="dark"] .finder-toolbar__btn,
+html[data-theme="dark"] .finder-toolbar__crumb,
+html[data-theme="dark"] .finder-toolbar__search,
+html[data-theme="dark"] .finder-toolbar__views { background: rgba(30,41,59,0.84); border-color: rgba(148,163,184,0.12); color: #dbe7f5; }
+html[data-theme="dark"] .finder-sidebar__heading,
+html[data-theme="dark"] .finder-sidebar__hint,
+html[data-theme="dark"] .finder-main__col,
+html[data-theme="dark"] .finder-row__col,
+html[data-theme="dark"] .finder-row__meta,
+html[data-theme="dark"] .finder-row__gridMeta,
+html[data-theme="dark"] .finder-inspector__kind,
+html[data-theme="dark"] .finder-main__empty,
+html[data-theme="dark"] .finder-toolbar__sep,
+html[data-theme="dark"] .finder-statusbar { color: #9fb0c2; }
+html[data-theme="dark"] .finder-row { color: #dbe7f5; border-color: rgba(148,163,184,0.06); }
+html[data-theme="dark"] .finder-row__nameText,
+html[data-theme="dark"] .finder-inspector__name,
+html[data-theme="dark"] .finder-sidebar__label { color: #e5edf7; }
+html[data-theme="dark"] .finder-main { background: rgba(15,23,42,0.42); }
+html[data-theme="dark"] .finder-columns__col { background: rgba(17,24,39,0.52); border-color: rgba(148,163,184,0.08); }
+html[data-theme="dark"] .finder-columns__item { color: #dbe7f5; }
+html[data-theme="dark"] .finder-columns__item--selected { background: rgba(45,108,255,0.16); color: #93b4ff; }
+html[data-theme="dark"] .finder-inspector__metaRow span:first-child { color: #9fb0c2; }
+html[data-theme="dark"] .finder-inspector__metaRow span:last-child { color: #dbe7f5; }
+html[data-theme="dark"] .finder-inspector__actions button { background: rgba(30,41,59,0.7); border-color: rgba(148,163,184,0.12); color: #dbe7f5; }
+html[data-theme="dark"] .finder-inspector__preview { background: rgba(17,24,39,0.84); border-color: rgba(148,163,184,0.1); color: #dbe7f5; }
+html[data-theme="dark"] .finder-row--selected { background: linear-gradient(180deg, rgba(92,137,255,0.18), rgba(45,108,255,0.1)); }
+html[data-theme="dark"] .finder-main__head { border-color: rgba(148,163,184,0.06); }
+html[data-theme="dark"] .finder-row--grid:hover { background: rgba(65,118,255,0.08); }

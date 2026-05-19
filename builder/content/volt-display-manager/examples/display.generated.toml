@@ -1,0 +1,57 @@
+# VOLT Display Manager — Runtime Generated Config
+# Path: /run/samaris/display.generated.toml
+# Regenerated on every successful apply cycle.
+# Consumed by Kernel A / React UI.
+
+primary = "HDMI-1"
+timestamp = 1715000000
+backend = "xrandr"
+session = "xorg"
+layout_mode = "extend"
+safe_mode = false
+
+[[screens]]
+name = "HDMI-1"
+vendor = "Samsung"
+model = "U28E590"
+width = 3840
+height = 2160
+native_width = 3840
+native_height = 2160
+refresh_rate = 60.0
+available_refresh_rates = [30.0, 59.94, 60.0]
+scale_factor = 2.0
+rotation = "normal"
+connected = true
+primary = true
+x = 0
+y = 0
+dpi_class = "retina"
+
+[[screens]]
+name = "DP-1"
+vendor = "Dell"
+model = "U2415"
+width = 1920
+height = 1200
+native_width = 1920
+native_height = 1200
+refresh_rate = 60.0
+available_refresh_rates = [59.95, 60.0]
+scale_factor = 1.0
+rotation = "normal"
+connected = true
+primary = false
+x = 3840
+y = 0
+dpi_class = "standard"
+
+[profile]
+scale_factor = 2.0
+dpi_class = "retina"
+recommended_ui_density = 1.15
+recommended_font_scale = 1.15
+recommended_spacing_scale = 2.0
+primary_logical_width = 1920
+primary_logical_height = 1080
+safe_mode = false
