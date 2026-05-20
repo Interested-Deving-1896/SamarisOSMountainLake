@@ -441,16 +441,19 @@ It operates with burst priority through the DWP scheduler — a dedicated 100 ms
   <strong>Two ISO variants · Free · No account · No telemetry</strong>
 </p>
 
-| Variant | Architecture | Size | Description |
-|---|---|---:|---|
-| **x86-64 FULL** | x86_64 | 5.1 GB | Single-architecture ISO for Intel/AMD. Full desktop, 26 apps, Orbit AI, and 9 Rust daemons |
-| **Universal** | x86_64 + aarch64 | 10.68 GB | Dual-architecture ISO for Intel/AMD and ARM. Contains both root filesystems |
+| Variant | Architecture | Size | Download | Description |
+|---|---|---:|---|---|
+| **Samaris OS Alpha One RC — x86_64 FULL** | x86_64 | 5.1 GB | [Download ISO](https://mega.nz/folder/Vn8WiAyZ#SVgyjxcdnh7eoBdFQiRR9A) | Full desktop experience for Intel/AMD systems with Orbit AI, 26 applications, Electron desktop shell, and 9 native Rust daemons |
+| **Samaris OS Alpha One RC — Universal** | x86_64 + aarch64 | 10.68 GB | [Download ISO](https://pub-acdac63983104a13aa0f945384a81f60.r2.dev/Samaris-OS-Alpha-One-RC.iso) | Dual-architecture release containing both Intel/AMD and ARM64 root filesystems in a single bootable image |
 
 <p align="center">
-  <a href="https://samaris.tech"><strong>Download from Samaris →</strong></a>
+  <a href="https://samaris.tech">
+    <strong>Official Website →</strong>
+  </a>
 </p>
 
-> ℹ️ The Universal ISO is larger because it ships two complete SquashFS filesystems in a single image: one for x86_64 and one for aarch64.
+> ℹ️ The Universal ISO includes two complete SquashFS root filesystems:
+> one for x86_64 and one for aarch64, allowing the same image to boot on both Intel/AMD and ARM64 systems.
 
 ---
 
